@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mobile-cz-ui-automation" />
+        <module name="mobile-jczj-ui-automation" />
+        <module name="smart-ui-automation-example" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mobile-cz-ui-automation" target="1.7" />
+      <module name="mobile-jczj-ui-automation" target="1.7" />
+      <module name="smart-ui-automation-example" target="1.7" />
+      <module name="smart-ui-framework" target="1.7" />
+      <module name="test" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

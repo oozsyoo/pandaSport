@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.xifan.automation:smart-ui-framework:3.6.5-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/xifan/automation/smart-ui-framework/3.6.5-SNAPSHOT/smart-ui-framework-3.6.5-20171018.035613-12.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/xifan/automation/smart-ui-framework/3.6.5-SNAPSHOT/smart-ui-framework-3.6.5-20171018.035613-12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/xifan/automation/smart-ui-framework/3.6.5-SNAPSHOT/smart-ui-framework-3.6.5-20171018.035613-12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
