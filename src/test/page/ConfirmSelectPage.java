@@ -54,9 +54,6 @@ public class ConfirmSelectPage extends AbstractPage {
 
 
     String totalPrice;
-
-@Autowired
-    Utils utils;
     @Autowired
     SuperLottoPage superLottoPage;
 
@@ -78,9 +75,8 @@ public class ConfirmSelectPage extends AbstractPage {
     /**
      * @param playWay
      * @param multiples
-     * @param dataMap
      */
-    public void setPlayWays(String playWay, String multiples, Map<String, String> dataMap) {
+    public void setPlayWays(String playWay, int multiples) {
 
 
         int index2 = 0;
@@ -110,7 +106,7 @@ public class ConfirmSelectPage extends AbstractPage {
                 getDriver().quit();
             }
         }
-//        multiple.sendKeys(multiples);
+        multiple.sendKeys(String.valueOf(multiples));
 //        List<String> strList = new ArrayList<>();
 //
 //        strList.addAll(StringUntils.transformSplit(totalPriceTv.getText(), "，", 4));
@@ -130,8 +126,8 @@ public class ConfirmSelectPage extends AbstractPage {
 //        dataMap.put("totalfee", totalPrice);
 //        dataMap.put("multiple", multiple);
 
-
-multiple.sendKeys(String.valueOf(new Random().nextInt(100) ));
+//随机获取倍数
+//        multiple.sendKeys(String.valueOf(new Random().nextInt(100)));
         submitBtn.click();
 
     }
@@ -151,7 +147,7 @@ multiple.sendKeys(String.valueOf(new Random().nextInt(100) ));
             case SUPERLOTTO_ADDSELF:
                 addSelfBtn.click();
                 break;
-                default:
+            default:
         }
 
         for (int n = 0; n < numbersTv.size(); n++) {

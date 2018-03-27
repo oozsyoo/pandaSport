@@ -1,6 +1,7 @@
 package test.page;
 
 import com.qa.framework.ioc.annotation.Page;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -102,12 +103,10 @@ public class GameSelectPage extends AbstractPage {
 
     @AndroidFindBy(xpath = "//android.widget.ExpandableListView[@resource-id=\"com.huored.android.DongFangHong:id/roomElv\"]//android.widget.FrameLayout")
     List<WebElement> infoList;
-
-
-    String et = " ";
-    Utils utils = new Utils();
+    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/hhggCheckBoxLayout")
+    WebElement hhggCheckBoxLayout;
+    private Utils utils = new Utils();
     private Random random = new Random();
-    private ConstantEnum ContantsEnum;
 
     public void choseWay(ConstantEnum way, int field, String playWay, List<String> playItem) {
         switch (way) {
@@ -115,7 +114,7 @@ public class GameSelectPage extends AbstractPage {
                 jczq(playWay, field, playItem);
                 break;
             case JCLQ:
-//                chosegamesJclq(field, playWay);
+
                 break;
             case ZC:
 
@@ -136,7 +135,7 @@ public class GameSelectPage extends AbstractPage {
     public void choseWay(ConstantEnum way, int field, String playWay) {
         switch (way) {
             case JCZQ:
-                jczq(playWay, field);
+                jczq(field);
                 break;
             case JCLQ:
 //                jclq(field, playWay);
@@ -157,126 +156,199 @@ public class GameSelectPage extends AbstractPage {
         }
     }
 
-    public void jczq(String playWay, int field) {
 
-        //获取所有比赛
-        List<WebElement> games = gameList.findElements(By.className("android.widget.FrameLayout"));
+    public void jczq(int field) {
+        WebElement element = Utils.findElementsByClassName(gameList, "android.widget.FrameLayout").get(0);
+        int startX = element.getLocation().getX();
+        int startY = element.getLocation().getY();
+        List<WebElement> item = null;
+        for (int i = 0; i < field; i++) {
+            //获取所有比赛
+            List<WebElement> games = Utils.findElementsByClassName(gameList, "android.widget.FrameLayout");
+            int endY = gameList.getLocation().getY();
+            int stepY = games.get(0).getSize().getHeight();
 
-        try {
-            for (int i = 0; i < field; i++) {
-                String more = "更多";
-                //按照顺序提取比赛
-                WebElement game = games.get(i);
-                //剔除不能点击的元素
-                List<WebElement> item = new Utils().removeUnableElement(game.findElements(By.className("android.widget.ToggleButton")));
-                //随机选取元素
-                WebElement element = item.get(random.nextInt(item.size()));
-                //获取选中元素的文本
-                String itemTv = element.getText();
-                //点击元素
-                element.click();
-                //如果点击了‘更多’则从更多中随机选取一个选项
-                if (itemTv.equals(more)) {
 
-                    List<WebElement> items = morePlays.findElements(By.className("android.widget.LinearLayout"))
-                            .get(random.nextInt(2) + 1)
-                            .findElements(By.className("android.widget.ToggleButton"));
-                    WebElement moreElement = items.get(random.nextInt(items.size()));
-                    moreElement.click();
-                    //点击确认，退出“更多”页面
-                    okBtn.click();
+            for (int a = 0; a < games.size(); a++) {
+                if (item == null) {
+                    WebElement game = games.get(0);
+                    //剔除不能点击的元素
+                    item = Utils.removeUnableElement(Utils.findElementsByClassName(game, "android.widget.ToggleButton"));
+
+                    if (utils.checkIsClicked(item)) {
+                        groupArrowIv.get(0).click();
+                        ((AppiumDriver) getDriver()).swipe(startX, startY + stepY, startX, startY + stepY / 2, 1000);
+                    }
+                } else {
+                    break;
                 }
-
-
             }
-        } catch (IndexOutOfBoundsException e) {
+            if (item == null) {
+                groupArrowIv.get(0).click();
+                ((AppiumDriver) getDriver()).swipe(startX, startY + stepY, startX, startY + stepY / 2, 1000);
+            }
+            //随机选取元素
+            WebElement element1 = item.get(random.nextInt(item.size()));
+            //获取选中元素的文本
+            String itemTv = element1.getText();
+            //点击元素
+            element1.click();
+            //如果点击了‘更多’则从更多中随机选取一个选项
+            String more = "更多";
+            if (itemTv.equals(more)) {
+                choseMorePlays();
+            }
+            ((AppiumDriver) getDriver()).swipe(startX, startY + stepY, startX, endY, 1000);
 
-            logger.info("比赛场数不足");
-
-            e.printStackTrace();
         }
 
 
-        //                int chosePlayway = random.nextInt(5);
-//                String r1 = switchPlayWay(chosePlayway, "common");//获取彩种
-//                List<WebElement> list = webelementMap.get(r1);
-//                Map<Integer, WebElement> webElementMap = untils.removeUnableElement(list);
-//                List<Integer> keyList = untils.getKeyValue(webElementMap);
-//                int r2 = untils.getNotRepeatNum(keyList);
-//
-//                WebElement webElement = webElementMap.get(keyList.get(r2));
-//                StringBuilder stringBuilder = new StringBuilder(webElement.getText());
-//                String str = "[" + stringBuilder.insert(1, "]");
-//
-//                et = et + playWayToChinese(r1, keyList.get(r2)) + " " + str;
-//            dataMap.put("et", et.trim());
         //提交所选选项
         submitBtn.click();
 
 
     }
 
+    public void choseMorePlays() {
+
+
+        List<WebElement> items = Utils.findElementsByClassName(morePlays, "android.widget.LinearLayout")
+                .get(random.nextInt(2) + 1)
+                .findElements(By.className("android.widget.ToggleButton"));
+        WebElement moreElement = items.get(random.nextInt(items.size()));
+        moreElement.click();
+
+        //点击确认，退出“更多”页面
+        okBtn.click();
+
+    }
 
     public void jczq(String playWay, int field, List<String> playItem) {
+        WebElement element = Utils.findElementsByClassName(gameList, "android.widget.FrameLayout").get(0);
+        int startX = element.getLocation().getX();
+        int startY = element.getLocation().getY();
+        List<WebElement> item = null;
 
-        List<WebElement> games = gameList.findElements(By.className("android.widget.FrameLayout"));
-        if (playWay.equals("1串1")) {
 
-            WebElement game = games.get(random.nextInt(games.size() - 1));
-            for (int i = 0; i < playItem.size(); i++) {
-                String items = playItem.get(i);
-                select(items, i, game);
-            }
-        }
-        for (int i = 0; i < field; i++) {
-            WebElement game = games.get(i);
-            String items = playItem.get(i);
-            select(items, i, game);
-        }
-        submitBtn.click();
+            select(playWay, playItem, field);
+            submitBtn.click();
+
+
+
     }
 
 
-    private void select(String items, int i, WebElement game) {
-        WebElement more = game.findElement(By.id("com.huored.android.DongFangHong:id/gridTbMore"));
-        List<WebElement> item = new ArrayList<>();
-        WebElement element;
-        try {
-            switch (items) {
-                case "胜平负":
-                    item = choseLayoutItem(spfLayout.get(i));
-                    break;
-                case "让分胜平负":
-                    item = choseLayoutItem(rqSpfLayout.get(i));
-                    break;
-                case "比分":
-                    more.click();
-                    item = choseLayoutItem(bfLayout);
-                    break;
-                case "进球数":
-                    more.click();
-                    item = choseLayoutItem(jqsLayout);
-                    break;
-                case "半全场":
-                    more.click();
-                    item = choseLayoutItem(bqcLayout);
-                    break;
+    private void select(String playWay, List<String> playItem, int feild) {
+        int count;
+        WebElement game = null;
+        List<WebElement> item = null;
+        List<WebElement> games = Utils.findElementsByClassName(gameList, "android.widget.FrameLayout");
+        int endY = games.get(0).getLocation().getY();
+        int stepY = games.get(0).getSize().getHeight();
+
+
+        //  int endY = gameList.getLocation().getY();
+//        int stepY = games.get(0).getSize().getHeight();
+
+//
+//            for (int a = 0; a < games.size(); a++) {
+//                if (item == null) {
+//                    WebElement game = games.get(0);
+//                    //剔除不能点击的元素
+//                    item = Utils.removeUnableElement(Utils.findElementsByClassName(game, "android.widget.ToggleButton"));
+//
+//                    if (utils.checkIsClicked(item)) {
+//                        groupArrowIv.get(0).click();
+//                        ((AppiumDriver) getDriver()).swipe(startX, startY + stepY, startX, startY + stepY / 2, 1000);
+//                    }
+//                } else {
+//                    break;
+//                }
+//            }
+//            if (item == null) {
+//                groupArrowIv.get(0).click();
+//                ((AppiumDriver) getDriver()).swipe(startX, startY + stepY, startX, startY + stepY / 2, 1000);
+//            }
+//            //随机选取元素
+//            WebElement element1 = item.get(random.nextInt(item.size()));
+//            //获取选中元素的文本
+//            String itemTv = element1.getText();
+//            //点击元素
+//            element1.click();
+//            //如果点击了‘更多’则从更多中随机选取一个选项
+//            String more = "更多";
+//            if (itemTv.equals(more)) {
+//                choseMorePlays();
+//            }
+//            ((AppiumDriver) getDriver()).swipe(startX, startY + stepY, startX, endY, 1000);
+//
+//        }
+
+
+//        //提交所选选项
+//        submitBtn.click();
+        if (playWay.equals("1串1")) {
+
+            game = games.get(random.nextInt(games.size() - 1));
+            count = playItem.size();
+        } else {
+            count = feild;
+        }
+        int a = 0;
+        for (int i = 0; i < count; i++) {
+            if (!playWay.equals("1串1")) {
+                game = games.get(a);
             }
-            if (item != null) {
-                element = item.get(random.nextInt(item.size()));
-                element.click();
-            } else {
-                logger.info("选项为空，无选项可选");
+            int startY = game.getLocation().getY();
+            int startX = game.getLocation().getX();
+            boolean t = (hhggCheckBoxLayout.getLocation().getY() - startY) < stepY;
+            if (t) {
+                ((AppiumDriver) getDriver()).swipe(startX, startY, startX, endY, 1500);
+                game = Utils.findElementsByClassName(gameList, "android.widget.FrameLayout").get(0);
+                a = 0;
             }
+            String items = playItem.get(i);
+            WebElement more = Utils.findElementById(game, "com.huored.android.DongFangHong:id/gridTbMore");
+            item = new ArrayList<>();
+            WebElement element;
+            try {
+                switch (items) {
+                    case "胜平负":
+                        item = choseLayoutItem(spfLayout.get(i));
+                        break;
+                    case "让分胜平负":
+                        item = choseLayoutItem(rqSpfLayout.get(i));
+                        break;
+                    case "比分":
+                        more.click();
+                        item = choseLayoutItem(bfLayout);
+                        break;
+                    case "进球数":
+                        more.click();
+                        item = choseLayoutItem(jqsLayout);
+                        break;
+                    case "半全场":
+                        more.click();
+                        item = choseLayoutItem(bqcLayout);
+                        break;
+                }
+                if (item != null) {
+                    element = item.get(random.nextInt(item.size()));
+                    element.click();
+                } else {
+                    logger.info("选项为空，无选项可选");
+                }
 
-            if (items.equals("半全场") || items.equals("进球数") || items.equals("比分")) {
-                okBtn.click();
+                if (items.equals("半全场") || items.equals("进球数") || items.equals("比分")) {
+                    okBtn.click();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-
+            a++;
         }
     }
 
@@ -417,7 +489,6 @@ public class GameSelectPage extends AbstractPage {
 //
 //        submitBtn.click();
 //    }
-
 
 
     public boolean checkSupport(String issue, String item, String gameNo) {

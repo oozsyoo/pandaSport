@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import test.Untils.Utils;
 
 import java.util.List;
 import java.util.Random;
@@ -32,24 +33,23 @@ public class CopyPage extends AbstractPage {
     @AndroidFindBy(id = "com.huored.android.DongFangHong:id/copyBtn")
     List<WebElement> copyBtns;
     Random random = new Random();
-
+    Utils utils = new Utils();
 
     public void copy() {
-
+        utils.monkey(getDriver());
         copyBtns.get(random.nextInt(copyBtns.size())).click();
 
-            int mu = random.nextInt(20);
-            String numStr = String.valueOf(mu);
-            multiples.sendKeys(numStr);
+        int mu = random.nextInt(20);
+        String numStr = String.valueOf(mu);
+        multiples.sendKeys(numStr);
 
-            okBtn.click();
-            okBtn.click();
+        okBtn.click();
+        okBtn.click();
 
-            continueBuy.click();
+        continueBuy.click();
 
 
         new Swipe(getDriver()).swipeToUp();
-
 
 
     }

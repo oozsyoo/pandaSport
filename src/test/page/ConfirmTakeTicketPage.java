@@ -27,6 +27,11 @@ public class ConfirmTakeTicketPage extends AbstractPage {
     private WebElement totalMoneyTv;
     @AndroidFindBy(id = "com.huored.android.DongFangHong:id/fanganDescEt")
     private WebElement titleEt;
+
+    public WebElement getOkBtn() {
+        return okBtn;
+    }
+
     @AndroidFindBy(id = "com.huored.android.DongFangHong:id/okBtn")
     private WebElement okBtn;
     @AndroidFindBy(id = "com.huored.android.DongFangHong:id/ltTypeTv")
@@ -84,30 +89,14 @@ public class ConfirmTakeTicketPage extends AbstractPage {
     }
 
 
-    /**
-     * 余额充足时，余额不足时（未写）
-     */
-    public void confrimPay() {
-        okBtn.click();
-//        Map<String, Object> map = TestModel.getMoney(1);
-//        int balance = Integer.parseInt(map.get("balance").toString());
-//        if (!balanceTv.getText().contains(String.valueOf(balance - fee))) {
-//            logger.info("余额显示错误");
+//    public void buySucceedChose(Boolean chose) {
+//        if (chose) {
+//            continueToBuyBtn.click();
+//            purchase p = new purchase();
+//            p.count();
+//        } else {
+//            checkDetailBtn.click();
 //        }
-        getSleeper().sleep(1000);
-        okBtn.click();
-
-    }
-
-
-    public void buySucceedChose(Boolean chose) {
-        if (chose) {
-            continueToBuyBtn.click();
-            purchase p = new purchase();
-            p.count();
-        } else {
-            checkDetailBtn.click();
-        }
-    }
+//    }
 
 }

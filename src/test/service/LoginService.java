@@ -22,22 +22,19 @@ public class LoginService {
     private HomePage homePage;
     @Autowired
     private RegisterPage registerPage;
-    @Autowired
-    private WaitUtils waitUtils;
 
     public void login(String cell, String password) {
-
-
-
-        if(loginPage.getClickToLogin().isDisplayed()){
+        if (loginPage.getCountDownTv().isDisplayed()) {
+            loginPage.getCountDownTv().click();
+        }
+        if (loginPage.getClickToLogin().isDisplayed()) {
             loginPage.getClickToLogin().click();
             loginPage.checkUpdate(false);
             loginPage.login(cell, password);
             loginPage.gesture(true);
-        }else {
+        } else {
             loginPage.gesture(false);
         }
-
 
 
 //     homePage.choseFragmentPage("会员中心");
@@ -55,18 +52,19 @@ public class LoginService {
 
         loginPage.checkUpdate(false);
         try {
+            WaitUtils waitUtils = new WaitUtils();
             waitUtils.waitForLoadingElementbyId(loginPage.getClickToLogin());
             loginPage.getClickToLogin().click();
 
-        } catch (RuntimeException  e) {
+        } catch (RuntimeException e) {
             e.printStackTrace();
             loginPage.gesture(false);
         }
-        try{
+        try {
             registerPage.register(cell, password);
             loginPage.gesture(true);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

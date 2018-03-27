@@ -87,31 +87,32 @@ public class TestCaseData {
     public static Object[][] login() {
         String user;
         String password;
-        String appBin=PropConfig.getAppBin();
-        if(appBin.contains("com")){
-             user = "15355090684";
-             password = "123456";
-        }else{
+        String appBin = PropConfig.getAppBin();
+        if (appBin.contains("com")) {
+            user = "15355090684";
+            password = "123456";
+        } else {
             Map<String, Object> map = TestModel.getUser(1);
-             user = map.get("cell").toString();
-             password = "123456";
+            user = map.get("cell").toString();
+            password = "123456";
         }
 
         return new Object[][]{
                 {user, password}
         };
     }
+
     @DataProvider(name = "reg")
     public static Object[][] reg() {
 
-            Map<String, Object> user = TestModel.getRegUser();
-            String call = user.get("cell1").toString();
-            String password = "123456";
-            return new Object[][]{
-                    {call, password}
-            };
+        Map<String, Object> user = TestModel.getRegUser();
+        String call = user.get("cell1").toString();
+        String password = "123456";
+        return new Object[][]{
+                {call, password}
+        };
 
-        }
+    }
 
     @DataProvider(name = "checkBalance")
     public static Object[][] checkBalance() {
@@ -125,22 +126,40 @@ public class TestCaseData {
 
     @DataProvider(name = "PlayWays")
     public static Object[][] PlayWays() {
-        int field = 6;
+        int field = 10;
         String playWay = "更多";
-        String multiples = "10";
+        int multiples = 10;
         return new Object[][]{
                 {field, playWay, ConstantEnum.PUBLIC.name, multiples}
         };
     }
+
+    @DataProvider(name = "PlayWays1")
+    public static Object[][] PlayWays1() {
+        int field = 2;
+        String playWay = "2串1";
+        List<String> playWayList = new ArrayList<>();
+        playWayList.add("胜平负");
+        playWayList.add("比分");
+        String payWay = "余额支付";
+        String password = "107212";
+
+
+        int multiples = 1;
+        return new Object[][]{
+                {field, playWay, playWayList, ConstantEnum.PUBLIC.name, multiples, password, payWay}
+        };
+    }
+
     @DataProvider(name = "superLotto")
     public static Object[][] SuperLotto() {
-        int redBall=5;
-        int buleBall=2;
+        int redBall = 5;
+        int buleBall = 2;
         int multiples = 2;
 
 
         return new Object[][]{
-                {redBall,buleBall, ConstantEnum.SUPERLOTTO_NORMAL,multiples,ConstantEnum.PUBLIC}
+                {redBall, buleBall, ConstantEnum.SUPERLOTTO_NORMAL, multiples, ConstantEnum.PUBLIC}
         };
     }
 

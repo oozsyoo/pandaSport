@@ -96,7 +96,7 @@ public class ImageUtils {
 //            System.out.println(di.height);
         Rectangle rec = new Rectangle(0, 0, di.width, di.height);
         BufferedImage bi = rb.createScreenCapture(rec);
-        int pixelColor = bi.getRGB(x+width/2, y+height/2);
+        int pixelColor = bi.getRGB(x+(width/2), y+(height/4));
 
         return 16777216 + pixelColor; // pixelColor的值为负，经过实践得出：加上颜色最大值就是实际颜色值。
     }
@@ -155,5 +155,35 @@ public class ImageUtils {
 
         return  list1;
     }
+
+
+
+    public static String test(WebDriver driver, WebElement element){
+        int x=element.getLocation().getX();
+        int y=element.getLocation().getY();
+        int width=element.getSize().width;
+        int height=element.getSize().height;
+        String adress = Utils.takeScreenShot(driver, "1");
+        String rbg = getImagePixel(adress,x+(width/2), y+(height/4));
+return rbg;
+
+//        Color pixel = new Color(0,0,0);
+//        Robot robot;
+//        Point mousepoint;
+//        int R,G,B;
+//        MouseInfo mouseinfo = null;
+//        try {
+//            robot = new Robot();
+//
+//        mousepoint = mouseinfo.getPointerInfo().getLocation();
+//        pixel = robot.getPixelColor(x,y);
+//        } catch (AWTException e) {
+//            e.printStackTrace();
+//        }
+//        R = pixel.getRed();
+//        G = pixel.getGreen();
+//        B = pixel.getBlue();
+    }
+
 
 }

@@ -2,6 +2,7 @@ package test.Untils;
 
 import com.qa.framework.common.Sleeper;
 import com.qa.framework.ioc.annotation.Autowired;
+import com.qa.framework.ioc.annotation.Page;
 import com.qa.framework.pagefactory.WithTimeout;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -16,11 +17,11 @@ import java.util.*;
 /**
  * Created by zsy on 2017/5/22.
  */
+@Page
 public class Utils {
     private final Logger logger = Logger.getLogger(this.getClass());
     private Sleeper sleeper = new Sleeper();
-    @Autowired
-    private WebDriver driver;
+
     @AndroidFindBy(xpath = "//*[@clickable='true']")
     List<WebElement> clickList;
     @WithTimeout(2000)
@@ -34,13 +35,12 @@ public class Utils {
     List<WebElement> lists = new ArrayList<>();
 
 
-    boolean checkNull = false;
+    private boolean checkNull = false;
     boolean haveBackIv = false;
     private Random random = new Random();
     private List<Integer> numList = new ArrayList<>();
     private List<Integer> numlist2 = new ArrayList<>();
-    List<Integer> list = new ArrayList<>();
-    int num = 0;
+    private List<Integer> list = new ArrayList<>();
 
     public void setNumlist2(List<Integer> numlist2) {
         this.numlist2 = numlist2;
@@ -96,7 +96,7 @@ public class Utils {
         return r2;
     }
 
-    boolean ElementExist(String id) {
+    boolean ElementExist(String id, WebDriver driver) {
         try {
             driver.findElement(By.id(id));
             return true;
@@ -143,6 +143,32 @@ public class Utils {
 
     }
 
+    public static WebElement findElementByXpath(WebElement element, String xpath) {
+        return element.findElement(By.xpath(xpath));
+    }
+
+    public static List<WebElement> findElementsByXpath(WebElement element, String xpath) {
+        return element.findElements(By.xpath(xpath));
+    }
+
+    public static WebElement findElementByClassName(WebElement element, String className) {
+        return element.findElement(By.className(className));
+    }
+
+    public static List<WebElement> findElementsByClassName(WebElement element, String className) {
+        return element.findElements(By.className(className));
+    }
+
+    public static WebElement findElementById(WebElement element, String id) {
+        return element.findElement(By.id(id));
+    }
+
+    public static List<WebElement> findElementsById(WebElement element, String id) {
+        return element.findElements(By.id(id));
+        
+    }
+
+
     /**
      * @param webElementMap
      * @return
@@ -165,7 +191,7 @@ public class Utils {
      * @param list
      * @return 有效的元素MAP
      */
-    public List<WebElement> removeUnableElement(List<WebElement> list) {
+    public  static  List<WebElement> removeUnableElement(List<WebElement> list) {
 
 
         for (int i = 0; i < list.size(); i++) {
@@ -178,8 +204,21 @@ public class Utils {
 
 
 
-    /**获取方法名
-     *
+    public boolean checkIsClicked(List<WebElement> list) {
+        boolean clicked = false;
+
+        for (WebElement aList : list) {
+            if (aList.getAttribute("checked").equals("true") && aList.getAttribute("enabled").equals("true")) {
+                clicked = true;
+
+            }
+        }
+        return clicked;
+    }
+
+
+    /**
+     * 获取方法名
      */
     public void getMethodName() {
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
@@ -210,11 +249,12 @@ public class Utils {
     }
 
 
-    public void clickTest() {
+    public void clickTest(WebDriver driver) {
         List<WebElement> list = new ArrayList<>();
         list.addAll(clickList);
         String oldActivity = ((AndroidDriver) driver).currentActivity();
         logger.info(oldActivity);
+        int num = 0;
         if (oldActivity.equals(ConstantEnum.MAINACTIVITY_NAME.name)) {
             num = 4;
 
@@ -226,7 +266,7 @@ public class Utils {
             logger.info(list.size());
             logger.info(i);
 
-            check(i, list.subList(0, list.size() - num + 1), oldActivity);
+            check(i, list.subList(0, list.size() - num + 1), oldActivity, driver);
 //            check(i,list,oldActivity);
         }
 
@@ -253,7 +293,7 @@ public class Utils {
     }
 
 
-    public void check(int i, List<WebElement> list, String oldActivity) {
+    public void check(int i, List<WebElement> list, String oldActivity, WebDriver driver) {
 
         WebElement webElement = list.get(i);
         logger.info(list.size());
@@ -335,9 +375,9 @@ public class Utils {
         return point;
     }
 
-    public void monkey() {
+    public void monkey(WebDriver driver) {
         String oldActivity = ((AndroidDriver) driver).currentActivity();
-        CmdUtils.runMonkeyCmd();
+//        CmdUtils.runMonkeyCmd();
         String newActivity = ((AndroidDriver) driver).currentActivity();
         for (int i = 0; i < 1000; i++) {
             checkCancelExit();
@@ -354,7 +394,7 @@ public class Utils {
     }
 
 
-    public void monkey(WebElement element) {
+    public void monkey(WebElement element, WebDriver driver) {
         String oldActivity = ((AndroidDriver) driver).currentActivity();
         CmdUtils.runMonkeyCmd();
         String newActivity = ((AndroidDriver) driver).currentActivity();

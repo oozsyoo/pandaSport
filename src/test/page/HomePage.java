@@ -1,11 +1,13 @@
 package test.page;
 
+import com.qa.framework.ioc.annotation.Autowired;
 import com.qa.framework.ioc.annotation.Page;
 import com.qa.framework.pagefactory.WithTimeout;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import test.Untils.ConstantEnum;
+import test.Untils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +42,9 @@ public class HomePage extends AbstractPage {
     @AndroidFindBy(id = "com.huored.android.DongFangHong:id/copyBtn")
     List<WebElement> copyBtns;
     @AndroidFindBy(id = "android:id/tabs")
-            WebElement tabs;
-
+    WebElement tabs;
+    @Autowired
+    Utils untils;
 
 
     Random random = new Random();
