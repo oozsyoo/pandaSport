@@ -21,29 +21,29 @@ public class ConfirmTakeTicketPage extends AbstractPage {
     //保密设置
     @AndroidFindBy(xpath = "//android.widget.RadioButton")
     private List<WebElement> privacySetting;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/payMoneyTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'payMoneyTv')]")
     private WebElement payMoneyTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/totalMoneyTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'totalMoneyTv')]")
     private WebElement totalMoneyTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/fanganDescEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'fanganDescEt')]")
     private WebElement titleEt;
 
     public WebElement getOkBtn() {
         return okBtn;
     }
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/okBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
     private WebElement okBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/ltTypeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'ltTypeTv')]")
     private WebElement ltTypeTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/messageTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'messageTv')]")
     private WebElement balanceTv;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/leftBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'leftBtn')]")
     private WebElement continueToBuyBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/rightBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'rightBtn')]")
     private WebElement checkDetailBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/xieyiTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'xieyiTv')]")
     WebElement xieyiTv;
 
 

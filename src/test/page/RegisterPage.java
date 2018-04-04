@@ -1,11 +1,9 @@
 package test.page;
 
 import com.qa.framework.ioc.annotation.Page;
-import com.qa.framework.pagefactory.WithTimeout;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import test.Untils.StringUtils;
+import test.Untils.MyStringUtils;
 import test.datamodel.TestModel;
 
 import java.util.List;
@@ -16,29 +14,29 @@ import java.util.List;
 @Page
 public class RegisterPage extends  AbstractPage{
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/phoneNumEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'phoneNumEt')]")
     WebElement phoneNumEt;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/verifyNumEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'verifyNumEt')]")
     WebElement verifyNumEt;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/getVerifyNumTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'getVerifyNumTv')]")
     WebElement getVerifyNumTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/nextBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'nextBtn')]")
     WebElement nextBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/registerBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'registerBtn')]")
     WebElement registerBtn;
 
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/userNameEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'userNameEt')]")
     private WebElement userNameEt;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/passwordEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'passwordEt')]")
     private WebElement newPasswordEt;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/confirmPasswordEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'confirmPasswordEt')]")
     private  WebElement confirmPasswordEt;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/selectBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'selectBtn')]")
     List<WebElement> selectBtn;
 
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/okBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
     private WebElement okBtn;
 
     public void register(String cell, String password) {
@@ -59,7 +57,7 @@ public class RegisterPage extends  AbstractPage{
 
         nextBtn.click();
 //      创建角色
-        userNameEt.sendKeys(StringUtils.createNewUser());
+        userNameEt.sendKeys(MyStringUtils.createNewUser());
         okBtn.click();
     }
 

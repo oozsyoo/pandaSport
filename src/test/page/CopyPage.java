@@ -19,18 +19,18 @@ import java.util.Random;
 @Page
 public class CopyPage extends AbstractPage {
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/beiEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'beiEt')]")
     WebElement multiples;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/okBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
     WebElement okBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/cancelBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'cancelBtn')]")
     WebElement cancelBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/leftBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'leftBtn')]")
     WebElement continueBuy;//继续购买
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/groupBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'groupBtn')]")
     WebElement groupBtn;  //方案详情页复制神单按钮
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/copyBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'copyBtn')]")
     List<WebElement> copyBtns;
     Random random = new Random();
     Utils utils = new Utils();

@@ -19,61 +19,59 @@ import java.util.*;
 public class GameSelectPage extends AbstractPage {
 
 
-    @AndroidFindBy(xpath = "//android.widget.ExpandableListView[@resource-id=\"com.huored.android.DongFangHong:id/roomElv\"]//android.widget.FrameLayout//android.widget.LinearLayout//android.widget.LinearLayout//android.widget.LinearLayout//android.widget.LinearLayout//android.widget.LinearLayout//android.widget.ToggleButton")
-    List<WebElement> list;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/okBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
     private WebElement okBtn;
-    @AndroidFindBy(xpath = "//android.widget.ToggleButton")
+    @AndroidFindBy(xpath = "//android.widget.ToggleButton')]")
     private List<WebElement> toggleBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/submitBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'submitBtn')]")
     public WebElement submitBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/groupArrowIv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'groupArrowIv')]")
     private List<WebElement> groupArrowIv;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/groupTitleTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'groupTitleTv')]")
     private WebElement issueNo;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='让球']")
     private List<WebElement> tag;
 
     //ft
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/spfLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'spfLayout')]")
     List<WebElement> spfLayout;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/rqspfLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'rqspfLayout')]")
     List<WebElement> rqSpfLayout;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/moreLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'moreLayout')]")
     List<WebElement> moreLayout;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/jqsLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'jqsLayout')]")
     WebElement jqsLayout;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/bfLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'bfLayout')]")
     WebElement bfLayout;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/bqcLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'bqcLayout')]")
     WebElement bqcLayout;
 
 
     //bt
-    @AndroidFindBy(id = "com.huored.android.LanTing:id/sfLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'sfLayout')]")
     List<WebElement> sfLayout;
-    @AndroidFindBy(id = "com.huored.android.LanTing:id/rfLayout")
+    @AndroidFindBy(id = "//*[contains(@resource-id,'rfLayout')]")
     List<WebElement> rfLayout;
-    @AndroidFindBy(id = "com.huored.android.LanTing:id/dxLayout")
+    @AndroidFindBy(id = "//*[contains(@resource-id,'dxLayout')]")
     List<WebElement> dxLayout;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/guestWinTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'guestWinTv')]")
     private List<WebElement> guestWinTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/homeWinTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'homeWinTv')]")
     private List<WebElement> homeWinTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/letGuestWinTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'letGuestWinTv')]")
     private List<WebElement> letGuestWinTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/letHomeWinTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'letHomeWinTv')]")
     private List<WebElement> letHomeWinTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/moreThanTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'moreThanTv')]")
     private List<WebElement> moreThanTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/lessThanTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'lessThanTv')]")
     private List<WebElement> lessThanTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/shengFenSelectTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'shengFenSelectTv')]")
     private List<WebElement> shengFenSelectTv;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/gridTbMore")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'gridTbMore')]")
     private List<WebElement> gridTbMore;
 
     @AndroidFindBy(xpath = "//android.widget.LinearLayout[@resource-id=\"com.huored.android.DongFangHong:id/jqsLayout\"]//android.widget.ToggleButton")
@@ -83,19 +81,19 @@ public class GameSelectPage extends AbstractPage {
     @AndroidFindBy(xpath = "//android.widget.LinearLayout[@resource-id=\"com.huored.android.DongFangHong:id/bqcLayout\"]//android.widget.ToggleButton")
     private List<WebElement> playwayBqc;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/gameNoTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'gameNoTv')]")
     private List<WebElement> gameNos;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/leagueNameTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'leagueNameTv')]")
 
     private List<WebElement> leagueNameTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/stopDateTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'stopDateTv')]")
     private List<WebElement> stopDateTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/stopTimeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'stopTimeTv')]")
     private List<WebElement> stopTimeTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/concedeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'concedeTv')]")
     List<WebElement> concedeTv;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/roomElv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'roomElv')]")
     private WebElement gameList;
     @AndroidFindBy(className = "android.widget.ScrollView")
     private WebElement morePlays;
@@ -103,7 +101,7 @@ public class GameSelectPage extends AbstractPage {
 
     @AndroidFindBy(xpath = "//android.widget.ExpandableListView[@resource-id=\"com.huored.android.DongFangHong:id/roomElv\"]//android.widget.FrameLayout")
     List<WebElement> infoList;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/hhggCheckBoxLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'hhggCheckBoxLayout')]")
     WebElement hhggCheckBoxLayout;
     private Utils utils = new Utils();
     private Random random = new Random();

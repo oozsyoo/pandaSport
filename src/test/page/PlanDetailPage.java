@@ -17,43 +17,43 @@ import java.util.Map;
 @Page
 public class PlanDetailPage  extends  AbstractPage{
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/homeTeamNameTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'homeTeamNameTv')]")
     private List<WebElement> homeTeamNameTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/guestTeamNameTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'guestTeamNameTv')]")
     private List<WebElement> guestTeamNameTv;
 
 
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/gameNoTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'gameNoTv')]")
     private List<WebElement> gameNos;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/gmtCreateTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'gmtCreateTv')]")
     private WebElement gmtCreateTv;//方案发起时间
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/titleTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'titleTv')]")
     private WebElement titleTv;//方案宣言
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/purchaseNoTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'purchaseNoTv')]")
     private WebElement purchaseNoTv;//方案编号
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/nicknameTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'nicknameTv')]")
     private WebElement nicknameTv;//发起人
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/createTypeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'createTypeTv')]")
     private WebElement createTypeTv;//方案类型
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/totalFeeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'totalFeeTv')]")
     private WebElement totalFeeTv;//方案金额-金额
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/multipleTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'multipleTv')]")
     private WebElement multipleTv;//方案金额-倍数
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/myPaidFeeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'myPaidFeeTv')]")
     private WebElement myPaidFeeTv;//您的认购
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/mixTypesTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'mixTypesTv')]")
     private WebElement mixTypesTv;//投注方式
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/statusTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'statusTv')]")
     private WebElement statusTv;//委托状况
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/prizeStatusTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'prizeStatusTv')]")
     private WebElement prizeStatusTv;//中奖状况
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/etOptionTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'etOptionTv')]")
     private List<WebElement> etOptionTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/ltTypeSubTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'ltTypeSubTv')]")
     List<WebElement> ltTypeSubTv;
     Utils utils =new Utils();
 

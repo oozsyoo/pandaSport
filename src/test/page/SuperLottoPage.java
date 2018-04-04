@@ -18,13 +18,13 @@ import java.util.Map;
 @Page
 public class SuperLottoPage extends AbstractPage{
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/ballTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'ballTv')]")
     private List<WebElement> ballTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/shakeLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'shakeLayout')]")
     private WebElement shakeTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/submitBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'submitBtn')]")
     private WebElement submitBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/totalTipTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'totalTipTv')]")
     private WebElement totalTipTv;
 
     Utils utils = new Utils();

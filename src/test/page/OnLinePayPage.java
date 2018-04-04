@@ -14,21 +14,21 @@ import java.util.NoSuchElementException;
  */
 @Page
 public class OnLinePayPage extends AbstractPage {
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/totalPayMoneyTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'totalPayMoneyTv')]")
     WebElement totalPayMoneyTv;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/purchaseNoTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'purchaseNoTv')]")
     WebElement purchaseNoTv;
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/restTimeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'restTimeTv')]")
     WebElement restTimeTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/toPayBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'toPayBtn')]")
     WebElement toPayBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/payLayout")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'payLayout')]")
     private List<WebElement> payLayouts;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/selectIv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'selectIv')]")
     private List<WebElement> selectIv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/passwordInputView")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'passwordInputView')]")
     private WebElement passwordInputView;
 
     public void choseBalancePay(String payWay) {

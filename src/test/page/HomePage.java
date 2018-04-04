@@ -21,11 +21,11 @@ import java.util.Random;
 public class HomePage extends AbstractPage {
 
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/ltLogoIv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'ltLogoIv')]")
     private List<WebElement> imgView;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/chongzhiBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'chongzhiBtn')]")
     private WebElement chongzhiBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/backBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'backBtn')]")
     private WebElement backBtn;
     @WithTimeout(3000)
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"首页\"]")
@@ -39,7 +39,7 @@ public class HomePage extends AbstractPage {
     @WithTimeout(3000)
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"购彩记录\"]")
     WebElement buyData;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/copyBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'copyBtn')]")
     List<WebElement> copyBtns;
     @AndroidFindBy(id = "android:id/tabs")
     WebElement tabs;

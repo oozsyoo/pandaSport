@@ -92,7 +92,7 @@ public class DataUtils {
 
     public static void putSuperLottoData(WebElement element) {
 
-        List<String> list = StringUtils.transformSplit(element.getText().replace("注", "注,").trim(), ",", 2);
+        List<String> list = MyStringUtils.transformSplit(element.getText().replace("注", "注,").trim(), ",", 2);
         superLottoMap.put("gameSelect", list);
     }
 

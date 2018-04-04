@@ -27,12 +27,14 @@ public class LoginService {
         if (loginPage.getCountDownTv().isDisplayed()) {
             loginPage.getCountDownTv().click();
         }
+
         if (loginPage.getClickToLogin().isDisplayed()) {
             loginPage.getClickToLogin().click();
             loginPage.checkUpdate(false);
             loginPage.login(cell, password);
             loginPage.gesture(true);
         } else {
+
             loginPage.gesture(false);
         }
 

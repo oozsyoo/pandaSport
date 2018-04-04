@@ -5,8 +5,7 @@ import com.qa.framework.ioc.annotation.Page;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 import test.Untils.ConstantEnum;
-import test.Untils.StringUtils;
-import test.Untils.Utils;
+import test.Untils.MyStringUtils;
 
 import java.util.*;
 
@@ -19,37 +18,37 @@ public class ConfirmSelectPage extends AbstractPage {
 
     @AndroidFindBy(xpath = "//android.widget.LinearLayout[@resource-id='com.huored.android.DongFangHong:id/passBtnsLl']/android.widget.ToggleButton")
     private List<WebElement> playWays;//串关方式集合
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/nameTb")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'nameTb')]")
     private List<WebElement> morePlayWays;//更多中的串关方式集合
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/okBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
     private WebElement okBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/totalPriceTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'totalPriceTv')]")
     private WebElement totalPriceTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/numEt")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'numEt')]")
     private WebElement multiple;//倍数
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/buyBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'buyBtn')]")
     WebElement buyBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/submitBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'submitBtn')]")
     private WebElement submitBtn;
 
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/deleteIv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'deleteIv')]")
     List<WebElement> deleteIv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/numbersTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'numbersTv')]")
     List<WebElement> numbersTv;
 
 
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/superAddTb")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'superAddTb')]")
     WebElement superAddTb;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/addRandomBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'addRandomBtn')]")
     WebElement addRandomBtn;//添加机选一注
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/addSelfBtn")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'addSelfBtn')]")
     WebElement addSelfBtn;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/tipTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'tipTv')]")
     List<WebElement> tipTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/zhuShuTipTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'zhuShuTipTv')]")
     WebElement zhuShuTipTv;
-    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/passTypeTv")
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'passTypeTv')]")
     WebElement passTypeTv;
 
 
@@ -64,7 +63,7 @@ public class ConfirmSelectPage extends AbstractPage {
         multiple.sendKeys(multiples);
         totalPrice = totalPriceTv.getText();
         List<String> list = new ArrayList<>();
-        list.addAll(StringUtils.transformSplit(zhuShuTipTv.getText(), "注", 2));
+        list.addAll(MyStringUtils.transformSplit(zhuShuTipTv.getText(), "注", 2));
         String multiple = list.get(1).substring(0, list.get(1).length() - 2);
         dataMap.put("totalfee", totalPrice);
         dataMap.put("multiple", multiple);
@@ -156,12 +155,12 @@ public class ConfirmSelectPage extends AbstractPage {
             ballMap.put(n, balls);
             multiple.sendKeys(Integer.toString(mul));
 
-            list.addAll(StringUtils.transformSplit(tipTv.get(n).getText().replace("注", "注，"), "，", 2));
+            list.addAll(MyStringUtils.transformSplit(tipTv.get(n).getText().replace("注", "注，"), "，", 2));
 
             tipMap.put(n, list);
 
         }
-        List<String> list2 = StringUtils.transformSplit(zhuShuTipTv.getText().replace("注", "注，").trim(), "，", 2);
+        List<String> list2 = MyStringUtils.transformSplit(zhuShuTipTv.getText().replace("注", "注，").trim(), "，", 2);
         superLottoPage.getSuperLottoMap().put("confirmSelect", list2);
 
         buyBtn.click();

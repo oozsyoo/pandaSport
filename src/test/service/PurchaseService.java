@@ -1,11 +1,9 @@
 package test.service;
 
 import com.qa.framework.ioc.annotation.Autowired;
-import com.qa.framework.ioc.annotation.Page;
 import com.qa.framework.ioc.annotation.Service;
 import test.Untils.ConstantEnum;
-import test.Untils.MonkeyUtils;
-import test.Untils.StringUtils;
+import test.Untils.MyStringUtils;
 import test.page.*;
 
 import java.util.List;
@@ -43,13 +41,13 @@ public class PurchaseService {
 
 
         homePage.chosePlayWay(ConstantEnum.JCZQ);
-        gameSelectPage.choseWay(ConstantEnum.JCZQ, field, StringUtils.transformSinglePass(playWay));
-        confirmSelectPage.setPlayWays(StringUtils.transformSinglePass(playWay), multiples);
+        gameSelectPage.choseWay(ConstantEnum.JCZQ, field, MyStringUtils.transformSinglePass(playWay));
+        confirmSelectPage.setPlayWays(MyStringUtils.transformSinglePass(playWay), multiples);
         confirmTakeTicketPage.setPrivacy(privacySettings);
         confirmTakeTicketPage.getPageData(purchasePage.getDataMap());
 
 
-        planDetailPage.checkDetailDate(planDetailPage.getDetailData(), field, StringUtils.transformSinglePass(playWay));
+        planDetailPage.checkDetailDate(planDetailPage.getDetailData(), field, MyStringUtils.transformSinglePass(playWay));
     }
 
     public void BuyInBulk(int field, String playWay, String privacySettings, int multiples, int degree) {
@@ -57,13 +55,13 @@ public class PurchaseService {
 
         homePage.chosePlayWay(ConstantEnum.JCZQ);
         gameSelectPage.jczq(field);
-        confirmSelectPage.setPlayWays(StringUtils.transformSinglePass(playWay), multiples);
+        confirmSelectPage.setPlayWays(MyStringUtils.transformSinglePass(playWay), multiples);
 
 
         for (int i = 0; i < degree; i++) {
 
             gameSelectPage.jczq(field);
-            confirmSelectPage.setPlayWays(StringUtils.transformSinglePass(playWay), multiples);
+            confirmSelectPage.setPlayWays(MyStringUtils.transformSinglePass(playWay), multiples);
 
 
             System.out.println(i);

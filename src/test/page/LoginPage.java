@@ -1,126 +1,117 @@
 package test.page;
 
-import com.qa.framework.ioc.annotation.Autowired;
 import com.qa.framework.ioc.annotation.Page;
 import com.qa.framework.pagefactory.WithTimeout;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import test.Untils.ImageUtils;
-import test.Untils.StringUtils;
-import test.Untils.Utils;
-import test.datamodel.TestModel;
 
 import java.awt.*;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Administrator on 2017/3/10.
  */
 @Page
 public class LoginPage extends AbstractPage {
-//    @WithTimeout(2000)
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/start")
-//    private WebElement startUpLoad;
-//    @WithTimeout(2000)
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/cancel")
-//    private WebElement notUpLoad;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/countDownTv")
-//    WebElement countDownTv;
+    @WithTimeout(2000)
+    @AndroidFindBy(xpath= "//*[contains(@id,'start')]")
+    private WebElement startUpLoad;
+    @WithTimeout(2000)
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'cancel')]")
+    private WebElement notUpLoad;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'countDownTv')]")
+    WebElement countDownTv;
+
+    @WithTimeout(2000)
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'button')]")
+    private WebElement clickToLogin;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'versionTv')]")
+    private WebElement version;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'checkUpdateTv')]")
+    private WebElement checkUpdateTv;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'testInterfaceTv')]")
+    private WebElement testInterfaceTv;
+
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'backIv')]")
+    private WebElement backIv;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'titleTv')]")
+    private WebElement titleTv;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'jjxIconIv')]")
+    private WebElement logoIv;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'authorizedTitle')]")
+    private WebElement authorizedTitle;
+
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'userNameEt')]")
+    private WebElement userNameEt;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'passwordEt')]")
+    private WebElement passwordEt;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'forgetPwdTv')]")
+    private WebElement forgetPwdTv;
+    @WithTimeout(2000)
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'loginBtn')]")
+    private WebElement loginBtn;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'registerBtn')]")
+    private WebElement RegisterBtn;
+
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'gestureView')]")
+    @WithTimeout(2000)
+    WebElement gestureView;
+    @WithTimeout(2000)
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'skipTv')]")
+    private WebElement skipTv;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'cancelBtn')]")
+    private WebElement cancelBtn;
+    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
+    private WebElement okBtn;
+
+
 //
-//    @WithTimeout(2000)
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/button")
-//    private WebElement clickToLogin;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/versionTv")
-//    private WebElement version;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/checkUpdateTv")
-//    private WebElement checkUpdateTv;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/testInterfaceTv")
-//    private WebElement testInterfaceTv;
+//    private WebElement startUpLoad = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/start"));
+//    private WebElement notUpLoad = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/cancel"));
 //
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/backIv")
-//    private WebElement backIv;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/titleTv")
-//    private WebElement titleTv;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/jjxIconIv")
-//    private WebElement logoIv;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/authorizedTitle")
-//    private WebElement authorizedTitle;
+//    private WebElement countDownTv = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/countDownTv"));
 //
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/userNameEt")
-//    private WebElement userNameEt;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/passwordEt")
-//    private WebElement passwordEt;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/forgetPwdTv")
-//    private WebElement forgetPwdTv;
-//    @WithTimeout(2000)
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/loginBtn")
-//    private WebElement loginBtn;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/registerBtn")
-//    private WebElement RegisterBtn;
+//    private WebElement clickToLogin= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/button"));
 //
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/gestureView")
-//    @WithTimeout(2000)
-//    WebElement gestureView;
-//    @WithTimeout(2000)
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/skipTv")
-//    private WebElement skipTv;
+//    private WebElement version= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/versionTv"));
 //
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/cancelBtn")
-//    private WebElement cancelBtn;
-//    @AndroidFindBy(id = "com.huored.android.DongFangHong:id/okBtn")
-//    private WebElement okBtn;
+//    private WebElement checkUpdateTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/checkUpdateTv"));
+//
+//    private WebElement testInterfaceTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/testInterfaceTv"));
+//
+//
+//    private WebElement backIv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/backIv"));
+//
+//    private WebElement titleTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/titleTv"));
+//
+//    private WebElement logoIv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/jjxIconIv"));
+//
+//    private WebElement authorizedTitle= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/authorizedTitle"));
+//
+//
+//    private WebElement userNameEt= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/userNameEt"));
+//
+//    private WebElement passwordEt= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/passwordEt"));
+//
+//    private WebElement forgetPwdTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/forgetPwdTv"));
+//
+//    private WebElement loginBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/loginBtn"));
+//
+//    private WebElement RegisterBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/registerBtn"));
+//
+//
+//
+//    private WebElement gestureView= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/gestureView"));
+//
+//    private WebElement skipTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/skipTv"));
+//
+//
+//    private WebElement cancelBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/cancelBtn"));
+//
+//    private WebElement okBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/countDownTv"));
 
-
-    private WebElement startUpLoad = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/start"));
-    private WebElement notUpLoad = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/cancel"));
-
-    private WebElement countDownTv = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/countDownTv"));
-
-    private WebElement clickToLogin= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/button"));
-
-    private WebElement version= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/versionTv"));
-
-    private WebElement checkUpdateTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/checkUpdateTv"));
-
-    private WebElement testInterfaceTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/testInterfaceTv"));
-
-
-    private WebElement backIv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/backIv"));
-
-    private WebElement titleTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/titleTv"));
-
-    private WebElement logoIv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/jjxIconIv"));
-
-    private WebElement authorizedTitle= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/authorizedTitle"));
-
-
-    private WebElement userNameEt= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/userNameEt"));
-
-    private WebElement passwordEt= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/passwordEt"));
-
-    private WebElement forgetPwdTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/forgetPwdTv"));
-
-    private WebElement loginBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/loginBtn"));
-
-    private WebElement RegisterBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/registerBtn"));
-
-
-
-    private WebElement gestureView= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/gestureView"));
-
-    private WebElement skipTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/skipTv"));
-
-
-    private WebElement cancelBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/cancelBtn"));
-
-    private WebElement okBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/countDownTv"));
 
     public WebElement getClickToLogin() {
         getSleeper().sleep(2000);
