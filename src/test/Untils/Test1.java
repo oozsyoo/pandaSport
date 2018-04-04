@@ -9,7 +9,7 @@ package test.Untils;
 public  class Test1 {
     public static void main(String[] args) {
        String t= Utils.readAPK("d:\\2.apk").get("packageName").toString();
-        System.out.print(t);
+        System.out.print(t+"");
     }
 
     }
