@@ -1,14 +1,20 @@
 package test.page;
 
+import com.qa.framework.common.ScreenShot;
 import com.qa.framework.ioc.annotation.Page;
 import com.qa.framework.pagefactory.WithTimeout;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import test.Untils.CheckImage;
 import test.Untils.ImageUtils;
+import test.Untils.ScreenShoot;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Administrator on 2017/3/10.
@@ -16,105 +22,64 @@ import java.awt.*;
 @Page
 public class LoginPage extends AbstractPage {
     @WithTimeout(2000)
-    @AndroidFindBy(xpath= "//*[contains(@id,'start')]")
+    @AndroidFindBy(xpath = "//*[contains(@id,'start')]")
     private WebElement startUpLoad;
     @WithTimeout(2000)
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'cancel')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'cancel')]")
     private WebElement notUpLoad;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'countDownTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'countDownTv')]")
     WebElement countDownTv;
 
     @WithTimeout(2000)
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'button')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'button')]")
     private WebElement clickToLogin;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'versionTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'versionTv')]")
     private WebElement version;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'checkUpdateTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'checkUpdateTv')]")
     private WebElement checkUpdateTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'testInterfaceTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'testInterfaceTv')]")
     private WebElement testInterfaceTv;
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'backIv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'backIv')]")
     private WebElement backIv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'titleTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'titleTv')]")
     private WebElement titleTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'jjxIconIv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/logoIv')]")
     private WebElement logoIv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'authorizedTitle')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'authorizedTitle')]")
     private WebElement authorizedTitle;
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'userNameEt')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'userNameEt')]")
     private WebElement userNameEt;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'passwordEt')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'passwordEt')]")
     private WebElement passwordEt;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'forgetPwdTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'forgetPwdTv')]")
     private WebElement forgetPwdTv;
     @WithTimeout(2000)
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'loginBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'loginBtn')]")
     private WebElement loginBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'registerBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'registerBtn')]")
     private WebElement RegisterBtn;
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'gestureView')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'gestureView')]")
     @WithTimeout(2000)
     WebElement gestureView;
     @WithTimeout(2000)
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'skipTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'skipTv')]")
     private WebElement skipTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'cancelBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'cancelBtn')]")
     private WebElement cancelBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'okBtn')]")
     private WebElement okBtn;
-
-
-//
-//    private WebElement startUpLoad = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/start"));
-//    private WebElement notUpLoad = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/cancel"));
-//
-//    private WebElement countDownTv = getAndroidDriver().findElement(By.id(getPackagePath() + ":id/countDownTv"));
-//
-//    private WebElement clickToLogin= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/button"));
-//
-//    private WebElement version= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/versionTv"));
-//
-//    private WebElement checkUpdateTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/checkUpdateTv"));
-//
-//    private WebElement testInterfaceTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/testInterfaceTv"));
-//
-//
-//    private WebElement backIv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/backIv"));
-//
-//    private WebElement titleTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/titleTv"));
-//
-//    private WebElement logoIv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/jjxIconIv"));
-//
-//    private WebElement authorizedTitle= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/authorizedTitle"));
-//
-//
-//    private WebElement userNameEt= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/userNameEt"));
-//
-//    private WebElement passwordEt= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/passwordEt"));
-//
-//    private WebElement forgetPwdTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/forgetPwdTv"));
-//
-//    private WebElement loginBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/loginBtn"));
-//
-//    private WebElement RegisterBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/registerBtn"));
-//
-//
-//
-//    private WebElement gestureView= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/gestureView"));
-//
-//    private WebElement skipTv= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/skipTv"));
-//
-//
-//    private WebElement cancelBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/cancelBtn"));
-//
-//    private WebElement okBtn= getAndroidDriver().findElement(By.id(getPackagePath() + ":id/countDownTv"));
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'jjxIconIv')]")
+    private WebElement iconIv;
+    @AndroidFindBy(className = "android.widget.ImageView")
+    private WebElement guestIcon;
 
 
     public WebElement getClickToLogin() {
         getSleeper().sleep(2000);
+
         return clickToLogin;
     }
 
@@ -124,18 +89,19 @@ public class LoginPage extends AbstractPage {
 
 
     public void login(String cell, String password) {
+
+        ScreenShoot.contrastImage("logo", getDriver(), logoIv);
+        clickToLogin.click();
+        getSleeper().sleep(5000);
+        ScreenShoot.contrastImage("login", getDriver(), iconIv);
 //          untils.clickTest();
-        getSleeper().sleep(3000);
+
+        getSleeper().sleep(1000);
 //          输入用户名密码
         userNameEt.sendKeys(cell);
 
         passwordEt.sendKeys(password);
-        try {
-            int i = ImageUtils.getElementPixel(loginBtn);
-            logger.info(i);
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
+
 //          点击登录
         loginBtn.click();
 
@@ -150,8 +116,7 @@ public class LoginPage extends AbstractPage {
      * false 输入手势密码
      */
     public void gesture(boolean exist) {
-
-        getSleeper().sleep(2000);
+//        ScreenShoot.contrastImage("test", getDriver());
         int height = gestureView.getSize().getHeight();
         int width = gestureView.getSize().getWidth();
         int yStep = height / 4;
@@ -166,6 +131,7 @@ public class LoginPage extends AbstractPage {
             gestureMove(startX + xStep, startY + yStep + yStep2, xStep, yStep2);
 
         } else {
+            ScreenShoot.contrastImage("guest", getDriver(), guestIcon);
             gestureMove(startX + xStep, startY + yStep, xStep, yStep);
         }
     }

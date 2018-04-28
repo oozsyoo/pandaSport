@@ -5,7 +5,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 import test.Untils.ConstantEnum;
 import test.Untils.DataUtils;
-import test.testcase.purchase;
 
 import java.util.List;
 import java.util.Map;
@@ -21,36 +20,52 @@ public class ConfirmTakeTicketPage extends AbstractPage {
     //保密设置
     @AndroidFindBy(xpath = "//android.widget.RadioButton")
     private List<WebElement> privacySetting;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'payMoneyTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'payMoneyTv')]")
     private WebElement payMoneyTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'totalMoneyTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'totalMoneyTv')]")
     private WebElement totalMoneyTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'fanganDescEt')]")
-    private WebElement titleEt;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'fanganDescEt')]")
+    private WebElement fanganDescEt;
 
     public WebElement getOkBtn() {
         return okBtn;
     }
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@class,android.widget.CheckBox)]")
+    List<WebElement> checkBoxList;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'cancelBtn')]")
+    private WebElement cancelBtn;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'okBtn')]")
     private WebElement okBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'ltTypeTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'ltTypeTv')]")
     private WebElement ltTypeTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'messageTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'messageTv')]")
     private WebElement balanceTv;
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'leftBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'leftBtn')]")
     private WebElement continueToBuyBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'rightBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'rightBtn')]")
     private WebElement checkDetailBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'xieyiTv')]")
-    WebElement xieyiTv;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'xieyiTv')]")
+    private WebElement xieyiTv;
 
+    //我要推广
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'publicizeCb')]")
+    private WebElement publicizeCb;
+    //收益保障
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'protectProfitCb')]")
+    private WebElement protectProfitCb;
+    //是否允许他人跟单
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'checkBox')]")
+    private WebElement checkBox;
+    //收益保障输入框
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'protectProfitEt')]")
+    private WebElement protectProfitEt;
 
     public void setPrivacy(ConstantEnum privacySettings) {
 
 
-//        untils.clickTest();
         switch (privacySettings) {
             case PUBLIC:
                 privacySetting.get(0).click();
@@ -61,7 +76,7 @@ public class ConfirmTakeTicketPage extends AbstractPage {
             case SECRET:
                 privacySetting.get(2).click();
                 break;
-                default:
+            default:
         }
     }
 
@@ -84,10 +99,13 @@ public class ConfirmTakeTicketPage extends AbstractPage {
         new DataUtils().checkData(dataMap.get("totalfee"), totalMoney, "方案金额");
         new DataUtils().checkData(dataMap.get("totalfee"), payMoney, "支付金额");
         //输入方案宣言
-        titleEt.sendKeys("11223344");
+        fanganDescEt.sendKeys("11223344");
 
     }
 
+    public void billSetting() {
+
+    }
 
 //    public void buySucceedChose(Boolean chose) {
 //        if (chose) {

@@ -3,9 +3,11 @@ package test.page;
 import com.qa.framework.ioc.annotation.Autowired;
 import com.qa.framework.ioc.annotation.Page;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import test.Untils.ConstantEnum;
 import test.Untils.MyStringUtils;
+import test.Untils.Utils;
 
 import java.util.*;
 
@@ -16,39 +18,40 @@ import java.util.*;
 @Page
 public class ConfirmSelectPage extends AbstractPage {
 
-    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@resource-id='com.huored.android.DongFangHong:id/passBtnsLl']/android.widget.ToggleButton")
-    private List<WebElement> playWays;//串关方式集合
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'nameTb')]")
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'nameTb')]")
     private List<WebElement> morePlayWays;//更多中的串关方式集合
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'okBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'passBtnsLl')]//android.widget.ToggleButton")
+    private List<WebElement> bunchWayList;//串关方式集合
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'okBtn')]")
     private WebElement okBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'totalPriceTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'totalPriceTv')]")
     private WebElement totalPriceTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'numEt')]")
-    private WebElement multiple;//倍数
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'buyBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'numEt')]")
+    private WebElement multipleEt;//倍数
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'buyBtn')]")
     WebElement buyBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'submitBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'submitBtn')]")
     private WebElement submitBtn;
 
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'deleteIv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'deleteIv')]")
     List<WebElement> deleteIv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'numbersTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'numbersTv')]")
     List<WebElement> numbersTv;
 
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'superAddTb')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'superAddTb')]")
     WebElement superAddTb;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'addRandomBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'addRandomBtn')]")
     WebElement addRandomBtn;//添加机选一注
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'addSelfBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'addSelfBtn')]")
     WebElement addSelfBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'tipTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'tipTv')]")
     List<WebElement> tipTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'zhuShuTipTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'zhuShuTipTv')]")
     WebElement zhuShuTipTv;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'passTypeTv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'passTypeTv')]")
     WebElement passTypeTv;
 
 
@@ -57,55 +60,27 @@ public class ConfirmSelectPage extends AbstractPage {
     SuperLottoPage superLottoPage;
 
     //supperLotto
-    public void zcSetPlayWays(String multiples, Map<String, String> dataMap) {
+    public void zcSetPlayWays(String multiple, Map<String, String> dataMap) {
 
 
-        multiple.sendKeys(multiples);
+        multipleEt.sendKeys(multiple);
         totalPrice = totalPriceTv.getText();
         List<String> list = new ArrayList<>();
         list.addAll(MyStringUtils.transformSplit(zhuShuTipTv.getText(), "注", 2));
-        String multiple = list.get(1).substring(0, list.get(1).length() - 2);
+        String multipleTv = list.get(1).substring(0, list.get(1).length() - 2);
         dataMap.put("totalfee", totalPrice);
-        dataMap.put("multiple", multiple);
+        dataMap.put("multiple", multipleTv);
         logger.info(dataMap);
         buyBtn.click();
     }
 
     /**
      * @param playWay
-     * @param multiples
+     * @param multiple
      */
-    public void setPlayWays(String playWay, int multiples) {
-
-
-        int index2 = 0;
-        int index = 0;
-        List<String> list = new ArrayList<>();
-        //遍历寻找串关方式中是否有符合的选项
-        for (int i = 0; i < playWays.size(); i++) {
-            if (playWays.get(i).getText().equals(playWay)) {
-                index = i + 1;
-            }
-        }
-        if (index != 0) {
-            playWays.get(index - 1).click();
-        } else {
-            playWays.get(playWays.size() - 1).click();
-            //遍历寻找“更多”中的串关方式是否有符合条件的
-            for (int i = 0; i < morePlayWays.size(); i++) {
-                if (morePlayWays.get(i).getText().equals(playWay)) {
-                    index2 = i + 1;
-                }
-            }
-            if (index2 != 0) {
-                morePlayWays.get(index2).click();
-                okBtn.click();
-            } else {
-                logger.info("找不到串关方式：" + playWay);
-                getDriver().quit();
-            }
-        }
-        multiple.sendKeys(String.valueOf(multiples));
+    public void setPlayWays(String playWay, String multiple) {
+        findPlayWays(playWay);
+        multipleEt.sendKeys(multiple);
 //        List<String> strList = new ArrayList<>();
 //
 //        strList.addAll(StringUntils.transformSplit(totalPriceTv.getText(), "，", 4));
@@ -124,14 +99,65 @@ public class ConfirmSelectPage extends AbstractPage {
 //        dataMap.put("note", num);
 //        dataMap.put("totalfee", totalPrice);
 //        dataMap.put("multiple", multiple);
-
 //随机获取倍数
 //        multiple.sendKeys(String.valueOf(new Random().nextInt(100)));
         submitBtn.click();
 
     }
 
-    public void superLottoSetPlayWays(int mul, ConstantEnum playWay) {
+    public void setPlayWays(String playWay) {
+        findPlayWays(playWay);
+        submitBtn.click();
+
+    }
+
+    public void findPlayWays(String playWay) {
+        List<String> bunchWayList = new ArrayList<>(Arrays.asList(playWay.split(",")));
+
+        boolean index2 = false;
+        boolean index;
+        List<String> list = new ArrayList<>();
+        //遍历寻找串关方式中是否有符合的选项
+        for (int i = 0; i < bunchWayList.size(); i++) {
+            String bunchWay = bunchWayList.get(i);
+            index = chosePlayWay(this.bunchWayList, bunchWay);
+
+
+            if (!index) {
+                //点击更多
+                this.bunchWayList.get(this.bunchWayList.size() - 1).click();
+                //遍历寻找“更多”中的串关方式是否有符合条件的
+
+                if (!index2) {
+                    index2 = chosePlayWay(morePlayWays, bunchWay);
+                    okBtn.click();
+                } else {
+                    logger.info("找不到串关方式：" + playWay);
+                    getDriver().quit();
+                }
+            }
+        }
+    }
+
+
+    public boolean chosePlayWay(List<WebElement> playWays, String playWay) {
+
+        boolean index = false;
+        for (WebElement element : playWays) {
+
+            String t = element.getText();
+            if (t.equals(playWay)) {
+                element.click();
+                index = true;
+            }
+        }
+
+
+        return index;
+
+    }
+
+    public void superLottoSetPlayWays(String multiples, ConstantEnum playWay) {
 
 
         Map<Integer, String> ballMap = new HashMap<>();
@@ -153,7 +179,7 @@ public class ConfirmSelectPage extends AbstractPage {
             List<String> list = new ArrayList<>();
             String balls = numbersTv.get(n).getText().replace(" ", "，").replace("，:，", " | ");
             ballMap.put(n, balls);
-            multiple.sendKeys(Integer.toString(mul));
+            multipleEt.sendKeys(multiples);
 
             list.addAll(MyStringUtils.transformSplit(tipTv.get(n).getText().replace("注", "注，"), "，", 2));
 

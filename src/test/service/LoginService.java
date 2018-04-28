@@ -1,5 +1,6 @@
 package test.service;
 
+import com.qa.framework.common.Sleeper;
 import com.qa.framework.ioc.annotation.Autowired;
 import com.qa.framework.ioc.annotation.Page;
 import test.Untils.ConstantEnum;
@@ -22,14 +23,15 @@ public class LoginService {
     private HomePage homePage;
     @Autowired
     private RegisterPage registerPage;
+    @Autowired
+    private Sleeper sleeper;
 
     public void login(String cell, String password) {
-        if (loginPage.getCountDownTv().isDisplayed()) {
-            loginPage.getCountDownTv().click();
-        }
+        sleeper.sleep(3000);
 
         if (loginPage.getClickToLogin().isDisplayed()) {
-            loginPage.getClickToLogin().click();
+
+
             loginPage.checkUpdate(false);
             loginPage.login(cell, password);
             loginPage.gesture(true);

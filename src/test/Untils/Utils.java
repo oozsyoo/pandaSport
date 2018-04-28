@@ -337,12 +337,10 @@ public class Utils {
 
     }
 
-    public boolean isCheckEnable(WebElement element) {
-        boolean flag;
+    public static boolean checkEnable(WebElement element) {
+        boolean flag=false;
         try {
-
-
-            flag = element.isSelected();
+        if(element.getAttribute("enabled").equals("true")) flag=true;
         } catch (Exception e) {
             flag = false;
         }
@@ -576,4 +574,13 @@ public class Utils {
         return apkPath;
     }
 
+    public static void main(String[] args) {
+        String apkUrl = "res\\" +"RuYiRelease.com";
+        Map mapApk = Utils.readAPK(apkUrl);
+        String apkPath = mapApk.get("packageName").toString();
+        String versionName = mapApk.get("versionName").toString();
+
+        System.out.print(apkPath);
+        System.out.print(versionName);
+    }
 }

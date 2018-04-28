@@ -90,10 +90,11 @@ public class TestCaseData {
         String appBin = PropConfig.getAppBin();
         if (appBin.contains("com")) {
             user = "15355090684";
-            password = "123456";
+            password = "1234567";
         } else {
-            Map<String, Object> map = TestModel.getUser(1);
-            user = map.get("cell").toString();
+//            Map<String, Object> map = TestModel.getUser(1);
+//            user = map.get("cell").toString();
+            user = "15355090684";
             password = "123456";
         }
 
@@ -128,7 +129,7 @@ public class TestCaseData {
     public static Object[][] PlayWays() {
         int field = 10;
         String playWay = "更多";
-        int multiples = 10;
+        String multiples = "10";
         return new Object[][]{
                 {field, playWay, ConstantEnum.PUBLIC.name, multiples}
         };
@@ -136,30 +137,119 @@ public class TestCaseData {
 
     @DataProvider(name = "PlayWays1")
     public static Object[][] PlayWays1() {
-        int field = 2;
-        String playWay = "2串1";
-        List<String> playWayList = new ArrayList<>();
-        playWayList.add("胜平负");
-        playWayList.add("比分");
-        String payWay = "余额支付";
-        String password = "107212";
-
-
-        int multiples = 1;
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("2串1");
+//        playWay.add("3串1");
+//        playWay.add("3串3");
+//        playWays.add("胜平负,比分");
+//        playWays.add("胜平负,比分,比分");
+        playWays.add("让分胜负,大小分");
+        String version = "1.0.7";
+        String multiples = "2";
         return new Object[][]{
-                {field, playWay, playWayList, ConstantEnum.PUBLIC.name, multiples, password, payWay}
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
         };
     }
+
+
+
+    @DataProvider(name = "OnLineTest01")
+    public static Object[][] OnLineTest01() {
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("2串1");
+        playWays.add("让分胜负,大小分");
+        String version = "1.0.7";
+        String multiples = "3";
+        return new Object[][]{
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
+
+    @DataProvider(name = "OnLineTest02")
+    public static Object[][] OnLineTest02() {
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("3串1");
+        playWays.add("让分胜负,大小分,胜负");
+        String version = "1.0.7";
+        String multiples = "1";
+        return new Object[][]{
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
+
+    @DataProvider(name = "OnLineTest03")
+    public static Object[][] OnLineTest03() {
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("4串1");
+        playWays.add("让分胜负,大小分,胜负,客胜");
+        String version = "1.0.7";
+        String multiples = "1";
+        return new Object[][]{
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
+    @DataProvider(name = "OnLineTest20")
+    public static Object[][] OnLineTest20() {
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("2串1");
+        playWays.add("让分胜平负,比分");
+        String version = "1.0.7";
+        String multiples = "1";
+        return new Object[][]{
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
+    @DataProvider(name = "OnLineTest21")
+    public static Object[][] OnLineTest21() {
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("3串1");
+        playWays.add("让分胜平负,胜平负，比分");
+        String version = "1.0.7";
+        String multiples = "1";
+        return new Object[][]{
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
+    @DataProvider(name = "OnLineTest04")
+    public static Object[][] OnLineTest04() {
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("5串1");
+        playWays.add("让分胜负,大小分,胜负,客胜,主胜");
+        String version = "1.0.7";
+        String multiples = "1";
+        return new Object[][]{
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
+
+    @DataProvider(name = "OnLineTest31")
+    public static Object[][] OnLineTest31() {
+        int redBall = 5;
+        int buleBall = 2;
+        String multiples = "1";
+        String version = "1.0.7";
+        return new Object[][]{
+                {redBall, buleBall, ConstantEnum.SUPERLOTTO_NORMAL, multiples, ConstantEnum.PUBLIC,version}
+        };
+    }
+
 
     @DataProvider(name = "superLotto")
     public static Object[][] SuperLotto() {
         int redBall = 5;
         int buleBall = 2;
-        int multiples = 2;
-
+        String multiples = "2";
+        String version = "1.0.7";
 
         return new Object[][]{
-                {redBall, buleBall, ConstantEnum.SUPERLOTTO_NORMAL, multiples, ConstantEnum.PUBLIC}
+                {redBall, buleBall, ConstantEnum.SUPERLOTTO_NORMAL, multiples, ConstantEnum.PUBLIC,version}
         };
     }
 

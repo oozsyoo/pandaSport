@@ -3,13 +3,17 @@ package test.page;
 import com.qa.framework.ioc.annotation.Autowired;
 import com.qa.framework.ioc.annotation.Page;
 import com.qa.framework.pagefactory.WithTimeout;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import test.Untils.CheckImage;
 import test.Untils.ConstantEnum;
+import test.Untils.ScreenShoot;
 import test.Untils.Utils;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -21,12 +25,16 @@ import java.util.Random;
 public class HomePage extends AbstractPage {
 
 
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'ltLogoIv')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'ltLogoIv')]")
     private List<WebElement> imgView;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'chongzhiBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'chongzhiBtn')]")
     private WebElement chongzhiBtn;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'backBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'backBtn')]")
     private WebElement backBtn;
+
+    @AndroidFindBy(xpath = "//android.widget.ImageView[not(contains(@resource-id,'backBtn'))]")
+    private WebElement iconIv;
+
     @WithTimeout(3000)
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"首页\"]")
     WebElement home;
@@ -39,10 +47,20 @@ public class HomePage extends AbstractPage {
     @WithTimeout(3000)
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"购彩记录\"]")
     WebElement buyData;
-    @AndroidFindBy(xpath= "//*[contains(@resource-id,'copyBtn')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'copyBtn')]")
     List<WebElement> copyBtns;
     @AndroidFindBy(id = "android:id/tabs")
     WebElement tabs;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'setting')]")
+    WebElement setting;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'aboutLayout')]")
+    WebElement aboutLayout;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/versionTv')]")
+    WebElement versionTv;
+
+
     @Autowired
     Utils untils;
 
@@ -90,7 +108,7 @@ public class HomePage extends AbstractPage {
     }
 
     public void choseFragment(ConstantEnum key) {
-
+        getSleeper().sleep(3000);
         switch (key) {
             case HOME:
                 home.click();
@@ -113,5 +131,20 @@ public class HomePage extends AbstractPage {
 
     }
 
+    public void checkVersion(String version) {
+        setting.click();
+        aboutLayout.click();
+        List<String> list = new ArrayList<>(Arrays.asList(versionTv.getText().split("v")));
+        String version1 = list.get(1);
+
+        ScreenShoot.contrastImage("about",getDriver(),iconIv);
+        logger.info("实际版本号：" + version);
+        if (version.equals(version1)) {
+            logger.info("测试机版本号：" + version1 + "   " + " 版本号正确");
+        } else {
+            logger.info("测试机版本号：" + version1 + "   " + " 版本号错误");
+        }
+
+    }
 
 }

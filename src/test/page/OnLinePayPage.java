@@ -33,22 +33,29 @@ public class OnLinePayPage extends AbstractPage {
 
     public void choseBalancePay(String payWay) {
         WebElement select = null;
+        WebElement payLayout = null;
         switch (payWay) {
             case "余额支付":
                 try {
-                    select = payLayouts.get(0).findElement(By.id("com.huored.android.DongFangHong:id/selectIv"));
+                    payLayout = payLayouts.get(0);
                 } catch (NoSuchElementException e) {
                     e.printStackTrace();
                 }
 
                 break;
             case "银行卡支付":
-                select = payLayouts.get(1).findElement(By.id("com.huored.android.DongFangHong:id/selectIv"));
+                payLayout = payLayouts.get(1);
                 break;
             case "大额支付":
-                select = payLayouts.get(1).findElement(By.id("com.huored.android.DongFangHong:id/selectIv"));
+                payLayout = payLayouts.get(2);
                 break;
 
+        }
+
+        if (payLayout != null) {
+            select=payLayout.findElement(By.xpath("//*[contains(@resource-id,'selectIv')]"));
+        }else{
+            logger.info("无可用支付方式");
         }
         if (select != null) {
             select.click();

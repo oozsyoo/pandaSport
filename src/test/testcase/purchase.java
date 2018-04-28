@@ -3,7 +3,7 @@ package test.testcase;
 import com.qa.framework.TestCaseBase;
 import com.qa.framework.config.PropConfig;
 import com.qa.framework.ioc.annotation.Autowired;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import test.Untils.ConstantEnum;
 import test.datamodel.TestCaseData;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/15.
  */
-public class purchase extends TestCaseBase  {
+public class purchase extends TestCaseBase {
 
 
     @Autowired
@@ -26,48 +26,42 @@ public class purchase extends TestCaseBase  {
     @Autowired
     private HomePage homePage;
 
-    @BeforeMethod
-    public void loginJjx() {
-//        Test1 test1=new Test1();
-//       test1.readAPK("res\\" + PropConfig.getAppBin()).get("packageName").toString();
 
+    @Test(dataProviderClass = TestCaseData.class, dataProvider = "superLotto", description = "选法")
+    public void purchaseSuperLotto(int redBall, int buleBall, ConstantEnum playWay, String multiples, ConstantEnum privacySettings, String version) {
         if (PropConfig.getAppBin().contains("com")) {
             loginService.login("15355090684", "123456");
         } else {
-            loginService.login("18368090404", "123456");
+            loginService.login("15355090684", "123456");
         }
-
-    }
-
-
-    @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays", description = "玩法")
-    public void playWays(int field, String playWay, ConstantEnum privacySettings, int multiples) {
-
-        purchaseService.purchase(field, playWay, privacySettings, multiples);
+        purchaseService.purchaseSuperLotto(redBall, buleBall, privacySettings, playWay, multiples, version);
 
 
     }
 
-    @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays", description = "玩法", invocationCount = 2)
-    public void BuyInBulk(int field, String playWay, String privacySettings, int multiples) {
-
-        purchaseService.BuyInBulk(field, playWay, privacySettings, multiples, 100);
 
 
-    }
-
-    @Test(dataProviderClass = TestCaseData.class, dataProvider = "superLotto", description = "选法")
-    public void purchaseSuperLotto(int redBall, int buleBall, ConstantEnum playWay, int multiples, ConstantEnum privacySettings) {
-
-        purchaseService.purchaseSuperLotto(redBall, buleBall, privacySettings, playWay, multiples);
+    @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays1", description = "玩法")
+    public void test(List<String> playWay, List<String> playWays, ConstantEnum privacySettings, String multiples, String verison) {
+        if (PropConfig.getAppBin().contains("com")) {
+            loginService.login("15355090684", "123456");
+        } else {
+            loginService.login("15355090684", "123456");
+        }
+        purchaseService.testZq( playWay,privacySettings, multiples, playWays, verison);
 
 
     }
 
     @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays1", description = "玩法")
-    public void test(int field, String playWay, List<String> playWays, String privacySettings, int multiples, String password, String payWay) {
+    public void test2(List<String> playWay, List<String> playWays, ConstantEnum privacySettings, String multiples, String version) {
+        if (PropConfig.getAppBin().contains("com")) {
+            loginService.login("15355090684", "123456");
+        } else {
+            loginService.login("15355090684", "123456");
+        }
 
-        purchaseService.test(field, playWay, multiples, playWays, password, payWay);
+        purchaseService.testLq(playWay, privacySettings, multiples, playWays, version);
 
 
     }

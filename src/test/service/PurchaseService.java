@@ -13,8 +13,7 @@ import java.util.List;
  */
 @Service
 public class PurchaseService {
-    @Autowired
-    private PurchasePage purchasePage;
+
     @Autowired
     private HomePage homePage;
     @Autowired
@@ -33,52 +32,27 @@ public class PurchaseService {
 
     @Autowired
     private OnLinePayPage onLinePayPage;
-
-    public PurchaseService() {
-    }
-
-    public void purchase(int field, String playWay, ConstantEnum privacySettings, int multiples) {
+    @Autowired
+    private ResultPage resultPage;
 
 
-        homePage.chosePlayWay(ConstantEnum.JCZQ);
-        gameSelectPage.choseWay(ConstantEnum.JCZQ, field, MyStringUtils.transformSinglePass(playWay));
-        confirmSelectPage.setPlayWays(MyStringUtils.transformSinglePass(playWay), multiples);
-        confirmTakeTicketPage.setPrivacy(privacySettings);
-        confirmTakeTicketPage.getPageData(purchasePage.getDataMap());
-
-
-        planDetailPage.checkDetailDate(planDetailPage.getDetailData(), field, MyStringUtils.transformSinglePass(playWay));
-    }
-
-    public void BuyInBulk(int field, String playWay, String privacySettings, int multiples, int degree) {
-
-
-        homePage.chosePlayWay(ConstantEnum.JCZQ);
-        gameSelectPage.jczq(field);
-        confirmSelectPage.setPlayWays(MyStringUtils.transformSinglePass(playWay), multiples);
-
-
-        for (int i = 0; i < degree; i++) {
-
-            gameSelectPage.jczq(field);
-            confirmSelectPage.setPlayWays(MyStringUtils.transformSinglePass(playWay), multiples);
-
-
-            System.out.println(i);
-        }
-    }
-
-
-    public void purchaseSuperLotto(int redBall, int buleBall, ConstantEnum privacySettings, ConstantEnum playWay, int multiples) {
+    public void purchaseSuperLotto(int redBall, int buleBall, ConstantEnum privacySettings, ConstantEnum playWay, String multiples,String version) {
 
 
         homePage.chosePlayWay(ConstantEnum.DLT);
-        superLottoPage.shake();
-//        superLottoPage.choseBall(redBall, buleBall);
+//        superLottoPage.shake();
+        superLottoPage.choseBall(redBall, buleBall);
         confirmSelectPage.superLottoSetPlayWays(multiples, playWay);
         confirmTakeTicketPage.setPrivacy(privacySettings);
-        confirmTakeTicketPage.getPageData(purchasePage.getDataMap());
-
+        confirmTakeTicketPage.getOkBtn().click();
+        confirmTakeTicketPage.getOkBtn().click();
+        resultPage.choseNextStep("继续购买");
+        gameSelectPage.getBackBtn().click();
+        gameSelectPage.getBackBtn().click();
+        confirmTakeTicketPage.getOkBtn().click();
+        gameSelectPage.getBackBtn().click();
+        homePage.choseFragment(ConstantEnum.USERCENTER);
+        homePage.checkVersion(version);
     }
 
     public void copyTest() {
@@ -88,42 +62,72 @@ public class PurchaseService {
 
             copyPage.copy();
 
-
         }
     }
 
-    public void test(int field, String playWay, int multiples, List<String> playWays,String password,String payWay) {
+    public void testZq(List<String> playWay1, ConstantEnum privacy, String multiples, List<String> playWays1,String version) {
         homePage.chosePlayWay(ConstantEnum.JCZQ);
-//        monkeyUtils.monkeyTest();
-        gameSelectPage.jczq(playWay, field, playWays);
-        confirmSelectPage.setPlayWays(playWay, multiples);
-        confirmTakeTicketPage.setPrivacy(ConstantEnum.SECRET);
+
+            String playWay = playWay1.get(0);
+            String playWays = playWays1.get(0);
+
+            gameSelectPage.jczq(playWay, playWays);
+            confirmSelectPage.setPlayWays(playWay, multiples);
+            confirmTakeTicketPage.setPrivacy(privacy);
+            confirmTakeTicketPage.getOkBtn().click();
+            confirmTakeTicketPage.getOkBtn().click();
+            resultPage.choseNextStep("继续购买");
+            gameSelectPage.getBackBtn().click();
+
+            homePage.choseFragment(ConstantEnum.USERCENTER);
+            homePage.checkVersion(version);
+
+
+    }
+
+//    多次购彩
+//    public void testLq(List<String> playWay1, String privacy, String multiples, List<String> playWays1,String version) {
+//        homePage.chosePlayWay(ConstantEnum.JCLQ);
+//
+//        for (int i = 0; i < playWay1.size(); i++) {
+//            String playWay = playWay1.get(i);
+//            String playWays = playWays1.get(i);
+//
+//            gameSelectPage.jclq(playWay, playWays);
+//            confirmSelectPage.setPlayWays(playWay, multiples);
+//            confirmTakeTicketPage.setPrivacy(ConstantEnum.SECRET);
+//            confirmTakeTicketPage.getOkBtn().click();
+//            confirmTakeTicketPage.getOkBtn().click();
+//            resultPage.choseNextStep("继续购买");
+//        }
+//
+//    }
+
+    public void testLq(List<String> playWay1, ConstantEnum privacy, String multiples, List<String> playWays1, String version) {
+        homePage.chosePlayWay(ConstantEnum.JCLQ);
+
+        String playWay = playWay1.get(0);
+        String playWays = playWays1.get(0);
+
+        gameSelectPage.jclq(playWay, playWays);
+        confirmSelectPage.setPlayWays(playWay);
+        confirmTakeTicketPage.setPrivacy(privacy);
         confirmTakeTicketPage.getOkBtn().click();
-        onLinePayPage.choseBalancePay(payWay);
-        onLinePayPage.getToPayBtn().click();
-        onLinePayPage.inputPassWord(password);
+        confirmTakeTicketPage.getOkBtn().click();
+        resultPage.choseNextStep("继续购买");
+        gameSelectPage.getBackBtn().click();
+
+        homePage.choseFragment(ConstantEnum.USERCENTER);
+        homePage.checkVersion(version);
+
     }
 
 
-    public void choseFragment(ConstantEnum key) {
 
-        switch (key) {
-            case HOME:
-
-                break;
-            case FLLOW:
-
-                copyPage.copy();
-
-                break;
-            case BUYDATA:
-
-                break;
-            case USERCENTER:
-
-                break;
-            default:
-        }
+    public void test() {
+        homePage.choseFragment(ConstantEnum.USERCENTER);
+//        homePage.checkVersion();
     }
+
 }
 
