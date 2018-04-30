@@ -152,7 +152,32 @@ public class TestCaseData {
         };
     }
 
-
+    @DataProvider(name = "PlayWays2")
+    public static Object[][] PlayWays2() {
+        List<String> playWay = new ArrayList<>();
+        List<String> playWays = new ArrayList<>();
+        playWay.add("2串1");
+//        playWay.add("3串1");
+//        playWay.add("3串3");
+//        playWays.add("胜平负,比分");
+//        playWays.add("胜平负,比分,比分");
+        playWays.add("让分胜平负,比分,胜平负,进球数");
+        String version = "1.0.7";
+        String multiples = "2";
+        return new Object[][]{
+                {playWay, playWays, ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
+    @DataProvider(name = "PlayWays3")
+    public static Object[][] PlayWays3() {
+        List<String> playWay = new ArrayList<>();
+        playWay.add("SF");
+        String version = "1.0.7";
+        String multiples = "2";
+        return new Object[][]{
+                {playWay,ConstantEnum.PUBLIC, multiples, version}
+        };
+    }
 
     @DataProvider(name = "OnLineTest01")
     public static Object[][] OnLineTest01() {

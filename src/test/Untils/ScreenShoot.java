@@ -3,10 +3,9 @@ package test.Untils;
 import com.qa.framework.config.PropConfig;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -108,11 +107,12 @@ public class ScreenShoot {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        int height = element.getSize().getHeight();
-        int width = element.getSize().getWidth();
-        int x = element.getLocation().getX();
-        int y = element.getLocation().getY();
+        Dimension dimension=element.getSize();
+        int height = dimension.getHeight();
+        int width = dimension.getWidth();
+        Point point=element.getLocation();
+        int x = point.getX();
+        int y = point.getY();
         BufferedImage cutedImage = null;
 
 

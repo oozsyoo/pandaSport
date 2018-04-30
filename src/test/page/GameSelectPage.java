@@ -1,10 +1,13 @@
 package test.page;
 
+import com.qa.framework.common.Sleeper;
 import com.qa.framework.ioc.annotation.Page;
-import com.sun.org.apache.xerces.internal.impl.xs.identity.Field;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.apache.commons.collections.map.HashedMap;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import test.Untils.ConstantEnum;
 import test.Untils.Utils;
@@ -39,23 +42,26 @@ public class GameSelectPage extends AbstractPage {
     @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/ltTypeName')]")
     private List<WebElement> ltTypeNameList;
     //ft
+    @AndroidFindBy(xpath = "//android.widget.ExpandableListView//android.widget.FrameLayout")
+    List<WebElement> zqgGameList;
     @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/spfLayout')]")
     List<WebElement> spfLayout;
-    @AndroidFindBy(xpath = "//*[contains(@resource-id,'rqspfLayout')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/rqspfLayout')]")
     List<WebElement> rqSpfLayout;
-    @AndroidFindBy(xpath = "//*[contains(@resource-id,'moreLayout')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/moreLayout')]")
     List<WebElement> moreLayout;
-    @AndroidFindBy(xpath = "//*[contains(@resource-id,'jqsLayout')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/jqsLayout')]")
     WebElement jqsLayout;
-    @AndroidFindBy(xpath = "//*[contains(@resource-id,'bfLayout')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/bfLayout')]")
     WebElement bfLayout;
-    @AndroidFindBy(xpath = "//*[contains(@resource-id,'bqcLayout')]")
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/bqcLayout')]")
     WebElement bqcLayout;
 
 
     //bt
     @AndroidFindBy(xpath = "//android.widget.ExpandableListView/android.widget.LinearLayout")
     List<WebElement> gameList;
+
     @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/sfLayout')]")
     List<WebElement> sfLayout;
     @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/rfLayout')]")
@@ -102,6 +108,49 @@ public class GameSelectPage extends AbstractPage {
 
     @AndroidFindBy(xpath = "//*[contains(@resource-id,'hhggCheckBoxLayout')]")
     WebElement hhggCheckBoxLayout;
+
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/selectTitle')]")
+    private WebElement selectTitle;
+    @AndroidFindBy(xpath = "//android.widget.ListView[contains(@resource-id,'id/roomElv')]/android.widget.LinearLayout")
+    List<WebElement> listViewItem;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/content')]")
+    List<WebElement> playWays;
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb0')]")
+    List<WebElement> home0;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb1')]")
+    List<WebElement> home1;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb2')]")
+    List<WebElement> home2;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb3')]")
+    List<WebElement> home3;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb4')]")
+    List<WebElement> guest0;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb5')]")
+    List<WebElement> guest1;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb6')]")
+    List<WebElement> guest2;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb7')]")
+    List<WebElement> guest3;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb0')]")
+    List<WebElement> winList;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb1')]")
+    List<WebElement> drawList;
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/gridTb2')]")
+    List<WebElement> lostList;
+
+
+    @AndroidFindBy(xpath = "//*[contains(@resource-id,'id/buyBtn')]")
+    WebElement buyBtn;
+    @AndroidFindBy(className = "android.view.View")
+    List<WebElement> lineS;
+
+    public WebElement getBuyBtn() {
+        return buyBtn;
+    }
+
+
     private Utils utils = new Utils();
     private Random random = new Random();
 
@@ -129,7 +178,7 @@ public class GameSelectPage extends AbstractPage {
                 jclq(playWay, playItem);
                 break;
             case ZC:
-
+                choseZc(playWay);
                 break;
             case DLT:
 
@@ -165,7 +214,6 @@ public class GameSelectPage extends AbstractPage {
 
     public void choseMorePlays() {
 
-
         List<WebElement> items = Utils.findElementsByClassName(morePlays, "android.widget.LinearLayout")
                 .get(random.nextInt(2) + 1)
                 .findElements(By.className("android.widget.ToggleButton"));
@@ -174,7 +222,6 @@ public class GameSelectPage extends AbstractPage {
 
         //点击确认，退出“更多”页面
         okBtn.click();
-
     }
 
     public void jczq(String playWay, String playItems) {
@@ -192,8 +239,6 @@ public class GameSelectPage extends AbstractPage {
 //        WebElement element = Utils.findElementsByClassName(gameList, "android.widget.FrameLayout").get(0);
         selectLq(playWay, playItem);
         submitBtn.click();
-
-
     }
 
 
@@ -206,7 +251,7 @@ public class GameSelectPage extends AbstractPage {
         int endY = gameList.get(0).getLocation().getY();
         int stepY = gameList.get(1).getSize().getHeight();
         int y = stepY;
-        int bottomY = Math.abs(hhggCheckBoxLayout.getLocation().getY());
+        int bottomY = hhggCheckBoxLayout.getLocation().getY();
         if (playWay.equals("1串1")) {
 
             game = gameList.get(random.nextInt(gameList.size() - 1));
@@ -324,11 +369,10 @@ public class GameSelectPage extends AbstractPage {
         int count;
         WebElement game = null;
         List<WebElement> item = null;
-        List<WebElement> list = null;
-        int endY = gameList.get(0).getLocation().getY();
-        int stepY = gameList.get(0).getSize().getHeight();
 
-        list = exclude(gameList);
+        int endY = zqgGameList.get(0).getLocation().getY();
+        int stepY = zqgGameList.get(0).getSize().getHeight();
+
         //  int endY = gameList.getLocation().getY();
 //        int stepY = games.get(0).getSize().getHeight();
 
@@ -367,7 +411,7 @@ public class GameSelectPage extends AbstractPage {
 //        submitBtn.click();
         if (playWay.equals("1串1")) {
 
-            game = list.get(random.nextInt(list.size() - 1));
+            game = zqgGameList.get(random.nextInt(zqgGameList.size() - 1));
             count = playItem.size();
         } else {
             count = playItem.size();
@@ -376,10 +420,10 @@ public class GameSelectPage extends AbstractPage {
 
         for (int i = 0; i < count; i++) {
             if (!playWay.equals("1串1")) {
-                if(a<i){
-                    game = list.get(i);
-                }else {
-                    game = list.get(i);
+                if (a < i) {
+                    game = zqgGameList.get(i);
+                } else {
+                    game = zqgGameList.get(i);
                 }
             }
             //默认初始位置
@@ -394,35 +438,43 @@ public class GameSelectPage extends AbstractPage {
 
             if ((hhggCheckBoxLayout.getLocation().getY() - startY) < stepY) {
                 ((AppiumDriver) getDriver()).swipe(startX, startY, startX, endY, 1500);
-                game = exclude(gameList).get(0);
+                game = zqgGameList.get(0);
                 a = 0;
             }
             String items = playItem.get(i);
             WebElement more = gridTbMore.get(a);
 
             try {
-                switch (items) {
-                    case "胜平负":
-
-                        item = choseLayoutItem(spfLayout.get(i));
-                        break;
-                    case "让分胜平负":
-                        item = choseLayoutItem(rqSpfLayout.get(i));
-                        break;
-                    case "比分":
-                        more.click();
-                        item = choseLayoutItem(bfLayout);
-                        break;
-                    case "进球数":
-                        more.click();
-                        item = choseLayoutItem(jqsLayout);
-                        break;
-                    case "半全场":
-                        more.click();
-                        item = choseLayoutItem(bqcLayout);
-                        break;
+                if (game != null) {
+                    switch (items) {
+                        case "胜平负":
+                            item = choseZqItem(game.findElement(By.xpath("//*[contains(@resource-id,'id/spfLayout')]")));
+                            logger.info("胜平负:" + item.size());
+                            break;
+                        case "让分胜平负":
+                            item = choseZqItem(game.findElement(By.xpath("//*[contains(@resource-id,'id/rqspfLayout')]")));
+                            logger.info("让分胜平负:" + item.size());
+                            break;
+                        case "比分":
+                            more.click();
+                            item = choseZqItem(bfLayout);
+                            logger.info("比分:" + item.size());
+                            break;
+                        case "进球数":
+                            more.click();
+                            item = choseZqItem(jqsLayout);
+                            logger.info("进球数:" + item.size());
+                            break;
+                        case "半全场":
+                            more.click();
+                            item = choseZqItem(bqcLayout);
+                            logger.info("半全场:" + item.size());
+                            break;
+                    }
+                } else {
+                    logger.info("抓取的比赛为空");
                 }
-                checkElementClick(item, items);
+                checkZqElementClick(item, items);
 
                 if (items.equals("半全场") || items.equals("进球数") || items.equals("比分")) {
                     okBtn.click();
@@ -433,10 +485,11 @@ public class GameSelectPage extends AbstractPage {
 
 
             }
+
             a++;
         }
-    }
 
+    }
 
     private void selectDgp(List<String> playItem) {
 
@@ -542,11 +595,55 @@ public class GameSelectPage extends AbstractPage {
         }
     }
 
+    public void checkZqElementClick(List<WebElement> item, String playway) {
+        logger.info("进入选项选择-----------------------------------------------------");
+        WebElement element;
+        if (item != null) {
+            if (playway.equals("比分")) {
+                element = item.get(random.nextInt(30));
+                if (Utils.checkEnable(element)) {
+                    element.click();
+                } else {
+                    logger.info("所选选项不可点击");
+                }
+            } else if (playway.equals("进球数")) {
+                element = item.get(random.nextInt(7));
+                if (Utils.checkEnable(element)) {
+                    element.click();
+                } else {
+                    logger.info("所选选项不可点击");
+                }
+            } else if (playway.equals("半全场")) {
+                element = item.get(random.nextInt(8));
+                if (Utils.checkEnable(element)) {
+                    element.click();
+                } else {
+                    logger.info("所选选项不可点击");
+                }
+            } else {
+                element = item.get(random.nextInt(2));
+                if (Utils.checkEnable(element)) {
+                    element.click();
+                } else {
+                    logger.info("所选选项不可点击");
+                }
+            }
+
+
+        } else {
+            logger.info("选项为空，无选项可选");
+        }
+    }
+
 
     private List<WebElement> choseLayoutItem(WebElement layout) {
         return Utils.findElementsByClassName(layout, "android.widget.LinearLayout");
     }
 
+    private List<WebElement> choseZqItem(WebElement layout) {
+
+        return Utils.findElementsByClassName(layout, "android.widget.ToggleButton");
+    }
 
     public boolean checkSupport(String issue, String item, String gameNo) {
         boolean flag = false;
@@ -643,4 +740,208 @@ public class GameSelectPage extends AbstractPage {
         return flag;
 
     }
+
+    public void choseZc(String playWay) {
+        switch (playWay) {
+            case "JQ":
+                selectTitle.click();
+                playWays.get(1).click();
+                Map<Integer, Map<Integer, List<WebElement>>> map = getJqcElement(true);
+
+                for (int i = 0; i < map.size(); i++) {
+
+                    Map<Integer, List<WebElement>> webelementMap = map.get(i);
+                    for (int j = 0; j < webelementMap.size(); j++) {
+                        webelementMap.get(j).get(new Random().nextInt(4)).click();
+                    }
+                }
+                break;
+
+            case "NINE":
+                selectTitle.click();
+                playWays.get(2).click();
+
+
+                nineClick();
+                break;
+
+            case "SIX":
+                selectTitle.click();
+                playWays.get(3).click();
+                Map<Integer, Map<Integer, List<WebElement>>> map2 = getJqcElement(false);
+                int endY2 = listViewItem.get(0).getLocation().getY();
+                int x2 = listViewItem.get(0).getLocation().getX();
+                int starty2 = listViewItem.get(listViewItem.size() - 1).getLocation().getY();
+
+                for (int j = 0; j < 2; j++) {
+                    selectZcBqc(map2);
+                    ((AppiumDriver) getDriver()).swipe(x2, starty2, x2, endY2, 0);
+                }
+                break;
+
+            case "SF":
+                int endY3 = listViewItem.get(0).getLocation().getY();
+                int x3 = listViewItem.get(0).getLocation().getX();
+                int starty3 = listViewItem.get(listViewItem.size() - 1).getLocation().getY();
+                for (int i = 0; i < 3; i++) zcClick(x3, starty3, endY3);
+                break;
+        }
+
+
+        submitBtn.click();
+    }
+
+    /**
+     * 選擇足彩6場半全場的比賽
+     *
+     * @param map 6場半全場的比賽選項Map
+     */
+    public void selectZcBqc(Map<Integer, Map<Integer, List<WebElement>>> map) {
+        for (int i = 0; i < map.size(); i++) {
+
+            Map<Integer, List<WebElement>> webelementMap = map.get(i);
+            for (int f = 0; f < webelementMap.size(); f++) {//半全場各隨機選一個選項
+                List<WebElement> list = webelementMap.get(f);
+                if (!checkChecked(list)) {
+
+                    WebElement element = list.get(new Random().nextInt(3));
+                    if (element.getAttribute("checked").equals("false")) {
+                        element.click();
+                    }
+                }
+            }
+        }
+    }
+
+    public Map<Integer, Map<Integer, List<WebElement>>> getJqcElement(boolean chose) {
+        Map<Integer, Map<Integer, List<WebElement>>> jqcWebelement = new HashMap<>();
+
+        if (chose) {
+            for (int i = 0; i < home0.size(); i++) {
+                Map<Integer, List<WebElement>> map = new HashMap<>();
+                List<WebElement> list = new ArrayList<>();
+                List<WebElement> list2 = new ArrayList<>();
+                list.add(home0.get(i));
+                list.add(home1.get(i));
+                list.add(home2.get(i));
+                list.add(home3.get(i));
+                list2.add(guest0.get(i));
+                list2.add(guest1.get(i));
+                list2.add(guest2.get(i));
+                list2.add(guest3.get(i));
+                map.put(0, list);
+                map.put(1, list2);
+                jqcWebelement.put(i, map);
+
+
+            }
+        } else {
+            for (int i = 0; i < home0.size(); i++) {
+                Map<Integer, List<WebElement>> map = new HashMap<>();
+                List<WebElement> list = new ArrayList<>();
+                List<WebElement> list2 = new ArrayList<>();
+                list.add(home0.get(i));
+                list.add(home1.get(i));
+                list.add(home2.get(i));
+                list2.add(home3.get(i));
+                list2.add(guest0.get(i));
+                list2.add(guest1.get(i));
+                map.put(0, list);
+                map.put(1, list2);
+                jqcWebelement.put(i, map);
+
+
+            }
+        }
+        return jqcWebelement;
+    }
+
+    public void zcClick(int x, int starty, int endY) {
+
+        for (int i = 0; i < listViewItem.size(); i++) {
+            List<WebElement> playList = listViewItem.get(i).findElements(By.xpath("//*[contains(@class,'ToggleButton')]"));
+            if (!checkChecked(playList)) {
+                for (int j = 0; j < playList.size(); j++) {
+                    WebElement element = playList.get(j);
+                    if (element.getAttribute("checked").equals("false")) {
+                        element.click();
+                    }
+                }
+            }
+
+        }
+
+        ((AppiumDriver) getDriver()).swipe(x, starty, x, endY, 0);
+
+    }
+
+    public Map<String, Integer> getElementLocation(WebElement element) {
+        Map<String, Integer> map = new HashedMap();
+        Point location = element.getLocation();
+        int x = location.getX();
+        int y = location.getY();
+        Dimension size = element.getSize();
+        int stepX = size.getWidth();
+        int stepY = size.getHeight();
+        map.put("x", x);
+        map.put("y", y);
+        map.put("stepX", stepX);
+        map.put("stepY", stepY);
+
+        return map;
+    }
+
+    public void nineClick() {
+        boolean bound = false;
+        WebElement element = null;
+        WebElement game;
+        int stepY = listViewItem.get(1).getSize().getHeight();
+        int endY = lineS.get(lineS.size() - 1).getLocation().getY();
+        for (int i = 0; i < 9; i++) {
+            if (bound) {
+                game = listViewItem.get(listViewItem.size() - 1);
+            } else {
+                game = listViewItem.get(i);
+            }
+
+            Map<String, Integer> elementLoca = getElementLocation(game);
+            int startY = elementLoca.get("y");
+            int startX = elementLoca.get("x");
+            if (endY - startY < stepY || bound) {
+                logger.info(i);
+
+                if (bound) {
+                    ((AppiumDriver) getDriver()).swipe(startX, startY, 0, endY - stepY - stepY, 3000);
+                } else {
+                    ((AppiumDriver) getDriver()).swipe(startX, startY, 0, endY - stepY, 3000);
+                }
+                getSleeper().sleep(1000);
+                List<WebElement> itemsList = listViewItem.get(listViewItem.size() - 1)
+                        .findElements(By.xpath("//*[contains(@class,'ToggleButton')]"));
+                element = itemsList
+                        .get(new Random().nextInt(2));
+                bound = true;
+            } else {
+                List<WebElement> itemList = game.findElements(By.xpath("//*[contains(@class,'ToggleButton')]"));
+                element = itemList.get(new Random().nextInt(2));
+            }
+            element.click();
+        }
+    }
+
+
+    //判斷是否有點擊過的選項，有返回true，沒有返回false
+    public boolean checkChecked(List<WebElement> list) {
+        boolean flag = false;
+        for (int i = 0; i < list.size(); i++) {
+            WebElement element = list.get(i);
+            if (element.getAttribute("checked").equals("true")) {
+                flag = true;
+            }
+        }
+
+        return flag;
+    }
+
+
 }

@@ -36,7 +36,7 @@ public class PurchaseService {
     private ResultPage resultPage;
 
 
-    public void purchaseSuperLotto(int redBall, int buleBall, ConstantEnum privacySettings, ConstantEnum playWay, String multiples,String version) {
+    public void purchaseSuperLotto(int redBall, int buleBall, ConstantEnum privacySettings, ConstantEnum playWay, String multiples, String version) {
 
 
         homePage.chosePlayWay(ConstantEnum.DLT);
@@ -65,23 +65,40 @@ public class PurchaseService {
         }
     }
 
-    public void testZq(List<String> playWay1, ConstantEnum privacy, String multiples, List<String> playWays1,String version) {
+    public void testZq(List<String> playWay1, ConstantEnum privacy, String multiples, List<String> playWays1, String version) {
         homePage.chosePlayWay(ConstantEnum.JCZQ);
 
-            String playWay = playWay1.get(0);
-            String playWays = playWays1.get(0);
+        String playWay = playWay1.get(0);
+        String playWays = playWays1.get(0);
 
-            gameSelectPage.jczq(playWay, playWays);
-            confirmSelectPage.setPlayWays(playWay, multiples);
-            confirmTakeTicketPage.setPrivacy(privacy);
-            confirmTakeTicketPage.getOkBtn().click();
-            confirmTakeTicketPage.getOkBtn().click();
-            resultPage.choseNextStep("继续购买");
-            gameSelectPage.getBackBtn().click();
+        gameSelectPage.jczq(playWay, playWays);
+        confirmSelectPage.setPlayWays(playWay, multiples);
+        confirmTakeTicketPage.setPrivacy(privacy);
+        confirmTakeTicketPage.getOkBtn().click();
+        confirmTakeTicketPage.getOkBtn().click();
+        resultPage.choseNextStep("继续购买");
+        gameSelectPage.getBackBtn().click();
+        homePage.choseFragment(ConstantEnum.USERCENTER);
+        homePage.checkVersion(version);
 
-            homePage.choseFragment(ConstantEnum.USERCENTER);
-            homePage.checkVersion(version);
+    }
 
+
+    public void testZc(List<String> playWay1, ConstantEnum privacy, String multiples, String version) {
+        homePage.chosePlayWay(ConstantEnum.ZC);
+
+        String playWay = playWay1.get(0);
+
+
+        gameSelectPage.choseZc(playWay);
+        gameSelectPage.getBuyBtn().click();
+        confirmTakeTicketPage.setPrivacy(privacy);
+        confirmTakeTicketPage.getOkBtn().click();
+        confirmTakeTicketPage.getOkBtn().click();
+        resultPage.choseNextStep("继续购买");
+        gameSelectPage.getBackBtn().click();
+        homePage.choseFragment(ConstantEnum.USERCENTER);
+        homePage.checkVersion(version);
 
     }
 
@@ -121,7 +138,6 @@ public class PurchaseService {
         homePage.checkVersion(version);
 
     }
-
 
 
     public void test() {

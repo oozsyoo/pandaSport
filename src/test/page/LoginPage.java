@@ -131,7 +131,7 @@ public class LoginPage extends AbstractPage {
             gestureMove(startX + xStep, startY + yStep + yStep2, xStep, yStep2);
 
         } else {
-            ScreenShoot.contrastImage("guest", getDriver(), guestIcon);
+//            ScreenShoot.contrastImage("guest", getDriver(), guestIcon);
             gestureMove(startX + xStep, startY + yStep, xStep, yStep);
         }
     }

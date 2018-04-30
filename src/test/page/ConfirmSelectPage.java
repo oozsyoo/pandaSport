@@ -112,20 +112,20 @@ public class ConfirmSelectPage extends AbstractPage {
     }
 
     public void findPlayWays(String playWay) {
-        List<String> bunchWayList = new ArrayList<>(Arrays.asList(playWay.split(",")));
+        List<String> bunchWayStrList = new ArrayList<>(Arrays.asList(playWay.split(",")));
 
         boolean index2 = false;
         boolean index;
         List<String> list = new ArrayList<>();
         //遍历寻找串关方式中是否有符合的选项
-        for (int i = 0; i < bunchWayList.size(); i++) {
-            String bunchWay = bunchWayList.get(i);
-            index = chosePlayWay(this.bunchWayList, bunchWay);
+        for (int i = 0; i < bunchWayStrList.size(); i++) {
+            String bunchWay = bunchWayStrList.get(i);
+            index = chosePlayWay(bunchWayList, bunchWay);
 
 
             if (!index) {
                 //点击更多
-                this.bunchWayList.get(this.bunchWayList.size() - 1).click();
+                bunchWayList.get(bunchWayList.size() - 1).click();
                 //遍历寻找“更多”中的串关方式是否有符合条件的
 
                 if (!index2) {

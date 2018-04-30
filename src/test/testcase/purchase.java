@@ -41,7 +41,7 @@ public class purchase extends TestCaseBase {
 
 
 
-    @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays1", description = "玩法")
+    @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays2", description = "玩法")
     public void test(List<String> playWay, List<String> playWays, ConstantEnum privacySettings, String multiples, String verison) {
         if (PropConfig.getAppBin().contains("com")) {
             loginService.login("15355090684", "123456");
@@ -52,9 +52,20 @@ public class purchase extends TestCaseBase {
 
 
     }
+    @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays3", description = "玩法")
+    public void test2(List<String> playWay, ConstantEnum privacySettings, String multiples, String verison) {
+        if (PropConfig.getAppBin().contains("com")) {
+            loginService.login("15355090684", "123456");
+        } else {
+            loginService.login("15355090684", "123456");
+        }
+        purchaseService.testZc( playWay,privacySettings, multiples, verison);
+
+
+    }
 
     @Test(dataProviderClass = TestCaseData.class, dataProvider = "PlayWays1", description = "玩法")
-    public void test2(List<String> playWay, List<String> playWays, ConstantEnum privacySettings, String multiples, String version) {
+    public void test3(List<String> playWay, List<String> playWays, ConstantEnum privacySettings, String multiples, String version) {
         if (PropConfig.getAppBin().contains("com")) {
             loginService.login("15355090684", "123456");
         } else {
